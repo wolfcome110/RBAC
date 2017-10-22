@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-[assembly: log4net.Config.XmlConfigurator(ConfigFile = "Log4Net.config", Watch = true)]
-namespace DBUtility
+using System.Threading.Tasks;
+
+namespace Common
 {
     public class LogHelper
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
         public static void Debug(object ex)
         {
             Log.Debug(ex);
@@ -51,6 +51,4 @@ namespace DBUtility
             Log.Info(message, ex);
         }
     }
-
-
 }

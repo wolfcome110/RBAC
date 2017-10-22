@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetZip, Version=1.10.1.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.10.1\lib\net20\DotNetZip.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -37,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,12 +57,20 @@
     <Compile Include="CacheHelper.cs" />
     <Compile Include="ClassAttribute.cs" />
     <Compile Include="CookieHelper.cs" />
+    <Compile Include="DotNetZipHelper.cs" />
     <Compile Include="EncryptUtils.cs" />
+    <Compile Include="Enum.cs" />
+    <Compile Include="EnumHelper.cs" />
     <Compile Include="FileHelper.cs" />
     <Compile Include="FileHelper2.cs" />
+    <Compile Include="FTPHelper.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="ImageHelper.cs" />
+    <Compile Include="IpHelper.cs" />
     <Compile Include="JsonHelper.cs" />
+    <Compile Include="LogHelper.cs" />
+    <Compile Include="LogMessage.cs" />
+    <Compile Include="MemoryCacheHelper.cs" />
     <Compile Include="Order_SN.cs" />
     <Compile Include="Parameters.cs" />
     <Compile Include="ContentTypes.cs" />
@@ -63,7 +80,12 @@
     <Compile Include="XMLHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Log4Net.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Log4Net.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
