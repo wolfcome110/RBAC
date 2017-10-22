@@ -2,17 +2,22 @@
 <html>
 <head>
     <!-- The jQuery library is a prerequisite for all jqSuite products -->
-    <script src="Scripts/Guriddo_jqGrid_JS_5.2.1/js/jquery-1.11.0.min.js"></script>
+    <!--<script src="Scripts/Guriddo_jqGrid_JS_5.2.1/js/jquery-1.11.0.min.js"></script>-->
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
     <!-- This is the Javascript file of jqGrid -->
-    <script src="Scripts/Guriddo_jqGrid_JS_5.2.1/js/jquery.jqGrid.min.js"></script>
+    <!--<script src="Scripts/Guriddo_jqGrid_JS_5.2.1/js/jquery.jqGrid.min.js"></script>-->
+    <script src="Scripts/jqGrid/js/jquery.jqGrid.min.js"></script>
     <!-- This is the localization file of the grid controlling messages, labels, etc.
     <!-- We support more than 40 localizations -->
-    <script src="Scripts/Guriddo_jqGrid_JS_5.2.1/js/i18n/grid.locale-cn.js"></script>
+    <!--<script src="Scripts/Guriddo_jqGrid_JS_5.2.1/js/i18n/grid.locale-cn.js"></script>-->
+    <script src="Scripts/jqGrid/js/i18n/grid.locale-cn.js"></script>
     <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
-    <link href="Scripts/Guriddo_jqGrid_JS_5.2.1/css/ui.jqgrid-bootstrap-ui.css" rel="stylesheet" />
+    <!--<link href="Scripts/Guriddo_jqGrid_JS_5.2.1/css/ui.jqgrid-bootstrap-ui.css" rel="stylesheet" />-->
+    <link href="Scripts/jqGrid/css/ui.jqgrid-bootstrap-ui.css" rel="stylesheet" />
     <!-- The link to the CSS that the grid needs -->
-    <link href="Scripts/Guriddo_jqGrid_JS_5.2.1/css/ui.jqgrid.css" rel="stylesheet" />
-    <link href="http://www.guriddo.net/demo/css/jquery-ui.css"  rel="stylesheet"/>
+    <!--<link href="Scripts/Guriddo_jqGrid_JS_5.2.1/css/ui.jqgrid.css" rel="stylesheet" />-->
+    <link href="Scripts/jqGrid/css/ui.jqgrid.css" rel="stylesheet" />
+    <link href="Content/jquery-ui.css" rel="stylesheet" />
     <meta charset="utf-8" />
     <title>jqTreeGrid - Load On Demand - Load all Rows at once collapsed</title>
 </head>
@@ -22,7 +27,6 @@
     <div id="pager"></div>
 
     <script type="text/javascript">
-
 
         jQuery(document).ready(function($) {
 			jQuery('#tree').jqGrid({
