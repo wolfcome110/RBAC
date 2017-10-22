@@ -1,0 +1,144 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@using EF.RBAC.Models
+@model LoginViewModel
+
+<style>
+    .navbar-inverse {
+        background-color: #5CBDE2;
+        border-color: #5CBDE2;
+    }
+
+    .body-content {
+        width: 400px;
+    }
+
+    .error {
+        color: #a94442;
+    }
+</style>
+
+<script type="text/javascript">
+    $(function () {
+
+        $("#userName").val($.cookie("uname"));
+        $("#imgCode").on("click", function () {
+            $(this).src = "/Sys_Users/CheckCode"
+        });
+
+        $("#login").on("click", function () {
+            var d = { UserName: $("#userName").val(), Password: $("#pwd").val(), code: $("#code").val(), isRemember: $("#autoLogin:checked").val() };
+            $.ajax({
+                url: "/Sys_Users/Login",
+                type: "POST",
+                data: d,
+                beforeSend: function (data) {
+                    window.win = tools.waiting();
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (data.success) {
+                        window.location.href = "/admin";
+                    } else {
+                        $.messager.alert('提示', data.message, 'error', function () {
+                            tools.close(window.win);
+                        });
+                    }
+                },
+                error: function (jqXHR, textStatus, errorMsg) {
+                    // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                    // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                    // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                    $.messager.alert('提示', errorMsg, 'error', function () {
+                        tools.close(window.win);
+                    });
+                }
+            });
+        });
+
+        $("#arem").on("click", function () {
+
+            if ($("#autoLogin").prop("checked")) {
+                $("#autoLogin").removeAttr("checked");//取消选择
+            }
+            else {
+                $("#autoLogin").prop("checked", true);//选中
+            }
+
+        });
+
+        $(window).keydown(function (event) {
+            //console.log(event.keyCode);
+            switch (event.keyCode) {
+                case 27:
+                    $('#dg').datagrid('rejectChanges');
+                    break;
+                case 13:
+                    $("#login").click();
+                    break;
+
+            }
+        });
+    });
+    function changeCode() {
+        $("#imgCode").attr("src", "/Admin/CheckCode?" + Math.random());
+    }
+</script>
+
+
+<h2 class="text-center">登录</h2>
+<hr />
+<div class="container body-content">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal" id="frmLogin" method="post" action="">
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">用户名</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="txtUserName" name="txtUserName" placeholder="请输入用户名" value="0001" style="width:220px;" />
+                        <span class="errorMsg"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-3 control-label">密码</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" id="txtPassword" name="txtPassword" placeholder="请输入密码" value="123456" style="width:220px;" />
+                        <span class="errorMsg"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <label for="inputPassword3" class="col-sm-3 control-label">验证码</label>
+                    <div class="col-sm-9">
+
+                        <input class="form-control" type="text" id="code" name="code" style="width:35%;height:30px;padding:12px;display:inline-block;">
+                        <img style="margin:0 0 0 3px ; vertical-align:middle; height:26px;" src="/Sys_Users/CheckCode" id="imgCode" onclick="this.src = '/Sys_Users/CheckCode?rnd=' + Math.random();" />
+                        <span class="errorMsg"></span>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <div class="checkbox">
+                            <input data-val="true" data-val-required="记住我? 字段是必需的。" id="RememberMe" name="RememberMe" type="checkbox" value="true"><input name="RememberMe" type="hidden" value="false">
+                            <label for="RememberMe">记住我?</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button type="button" class="btn btn-default" id="btnLogin">登录</button> 
+                    </div>
+                </div>
+                <p>
+                    @Html.ActionLink("注册为新用户", "Register")
+                </p>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>

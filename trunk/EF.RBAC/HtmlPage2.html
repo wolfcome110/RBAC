@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- The jQuery library is a prerequisite for all jqSuite products -->
+    <script src="Scripts/Guriddo_jqGrid_JS_5.2.1/js/jquery-1.11.0.min.js"></script>
+    <!-- This is the Javascript file of jqGrid -->
+    <script src="Scripts/Guriddo_jqGrid_JS_5.2.1/js/jquery.jqGrid.min.js"></script>
+    <!-- This is the localization file of the grid controlling messages, labels, etc.
+    <!-- We support more than 40 localizations -->
+    <script src="Scripts/Guriddo_jqGrid_JS_5.2.1/js/i18n/grid.locale-cn.js"></script>
+    <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
+    <link href="Scripts/Guriddo_jqGrid_JS_5.2.1/css/ui.jqgrid-bootstrap-ui.css" rel="stylesheet" />
+    <!-- The link to the CSS that the grid needs -->
+    <link href="Scripts/Guriddo_jqGrid_JS_5.2.1/css/ui.jqgrid.css" rel="stylesheet" />
+    <link href="http://www.guriddo.net/demo/css/jquery-ui.css"  rel="stylesheet"/>
+    <meta charset="utf-8" />
+    <title>jqTreeGrid - Load On Demand - Load all Rows at once collapsed</title>
+</head>
+<body>
+
+    <table id="tree"></table>
+    <div id="pager"></div>
+
+    <script type="text/javascript">
+
+
+        jQuery(document).ready(function($) {
+			jQuery('#tree').jqGrid({
+				"url":"data1.json",
+				"colModel":[
+					{
+						"name":"category_id",
+						"index":"accounts.account_id",
+						"sorttype":"int",
+						"key":true,
+						"hidden":true,
+						"width":50
+					},{
+						"name":"name",
+						"index":"name",
+						"sorttype":"string",
+						"label":"Name",
+						"width":170
+					},{
+						"name":"price",
+						"index":"price",
+						"sorttype":"numeric",
+						"label":"Price",
+						"width":90,
+						"align":"right"
+					},{
+						"name":"qty_onhand",
+						"index":"qty_onhand",
+						"sorttype":"int",
+						"label":"Qty",
+						"width":90,
+						"align":"right"
+					},{
+						"name":"color",
+						"index":"color",
+						"sorttype":"string",
+						"label":"Color",
+						"width":100
+					},{
+						"name":"lft",
+						"hidden":true
+					},{
+						"name":"rgt",
+						"hidden":true
+					},{
+						"name":"level",
+						"hidden":true
+					},{
+						"name":"uiicon",
+						"hidden":true
+					}
+				],
+				"width":"780",
+				"hoverrows":false,
+				"viewrecords":false,
+				"gridview":true,
+				"height":"auto",
+				"sortname":"lft",
+				"loadonce":true,
+				"rowNum":100,
+				"scrollrows":true,
+				// enable tree grid
+				"treeGrid":true,
+				// which column is expandable
+				"ExpandColumn":"name",
+				// datatype
+				"treedatatype":"json",
+				// the model used
+				"treeGridModel":"nested",
+				// configuration of the data comming from server
+				"treeReader":{
+					"left_field":"lft",
+					"right_field":"rgt",
+					"level_field":"level",
+					"leaf_field":"isLeaf",
+					"expanded_field":"expanded",
+					"loaded":"loaded",
+					"icon_field":"icon"
+				},
+				"sortorder":"asc",
+				"datatype":"json",
+				"pager":"#pager"
+			});
+		});
+
+    </script>
+
+
+</body>
+</html>

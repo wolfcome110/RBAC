@@ -1,0 +1,136 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmins.cshtml";
+}
+<style type="text/css">
+    .datagrid {
+        float: left;
+        display: inline-table;
+    }
+
+    .datagrid {
+    }
+
+    .datagrid:first-of-type ~ .datagrid {
+        margin-left: 20px;
+    }
+</style>
+
+<script type="text/javascript">
+    $(function () {
+        var insertedRows = new Array();
+        var updatedRows = new Array();
+        var deletedRows = new Array();
+
+        $('#dgUsers').datagrid({
+            url: '/Sys_Users/index',
+            method: 'post',
+            title: '用户',
+            iconCls: 'icon-save',
+            dataType: "json",
+            rownumbers: true, //是否加行号
+            pagination: true, //是否显式分页
+            pageSize: 15, //页容量，必须和pageList对应起来，否则会报错
+            pageNumber: 2, //默认显示第几页
+            pageList: [15, 30, 45],//分页中下拉选项的数值
+            width: 500,
+            height: 600,
+            fitColumns: true,
+            singleSelect: false,
+            columns: [[
+                { field: "chk", checkbox: true },
+                { field: 'Id', title: 'Id', width: 70 },
+                { field: 'UserName', title: 'UserName', width: 120, },
+                { field: 'Email', title: 'Email', width: 120, },
+                {
+                    field: 'IsDisabled', title: 'IsDisabled', width: 120, formatter: function (value, row, index) {
+                        if (!value) {
+                            return "no";
+                        }
+                        else {
+                            return "yes";
+                        }
+                    }
+                },
+                { field: 'TrueName', title: 'TrueName', width: 120, },
+            ]],
+        });
+
+        $('#tgDepartments').treegrid({
+            title: '部门',
+            url: '/Sys_Departments/index',
+            idField: 'Id',
+            treeField: 'DepartmentName',
+            rownumbers: true, //是否加行号
+            iconCls: 'icon-save',
+            dataType: "json",
+            fitColumns: true,
+            singleSelect: false,
+            width: 490,
+            columns: [[
+                { field: "chk", checkbox: true },
+                { field: 'Id', title: 'Id', width: 70, hidden: true },
+                {
+                    field: 'DepartmentName', title: 'DepartmentName', width: 160
+                },
+                { field: 'ParentId', title: 'ParentId', width: 120, hidden: true },
+                { field: 'SortNum', title: 'SortNum', width: 70, hidden: true },
+
+            ]],
+
+
+        });
+        //ecs按键退出修改
+        $(window).keydown(function (event) {
+            //console.log(event.keyCode);
+            switch (event.keyCode) {
+                case 27:
+                    $('#dg').datagrid('rejectChanges');
+            }
+        });
+
+        $("#btnOk").on("click", function () {
+            var d = {};
+            //var d = new Object;
+            d["Users"] = JSON.stringify($("#dgUsers").treegrid("getSelections"));
+            d["Departments"] = JSON.stringify($("#tgDepartments").treegrid("getSelections"));
+            console.log(d);
+
+            $.ajax({
+                url: "Save",
+                type: "post",
+                data: d,
+                success: function (data, textStatus, jqXHR) {
+                    console.log(data);
+                    if (data.success) { }
+                    $.messager.alert('提示', data.Message, 'info');
+
+                    if (data.success) {
+                        //$("#dg").datagrid("reload");
+                    }
+                },
+                error: function (jqXHR, textStatus, errorMsg) {
+                    // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                    // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                    // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                    alert("请求失败：" + errorMsg);
+                }
+            });
+        });
+
+        $("#btnCancel").on("click", function () {
+            $('#win').window({ title: "Choose department", modal: true }).window("close");
+        });
+
+    });
+
+
+
+</script>
+
+<a id="btnOk" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" style="width:80px">Ok</a>
+<a id="btnCancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" style="width:80px">Cancel</a>
+
+<table id="dgUsers"></table>
+
+<table id="tgDepartments"></table>

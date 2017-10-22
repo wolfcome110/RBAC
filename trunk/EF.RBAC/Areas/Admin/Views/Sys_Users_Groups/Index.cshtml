@@ -1,0 +1,187 @@
+﻿@model IEnumerable<Model.Sys_Users_Groups>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmins.cshtml";
+}
+<style type="text/css">
+    .datagrid {
+        float: left;
+        display: inline-table;
+    }
+
+    .datagrid {
+    }
+
+    .datagrid:first-of-type ~ .datagrid {
+        margin-left: 20px;
+    }
+</style>
+
+<script type="text/javascript">
+    $(function () {
+        var insertedRows = new Array();
+        var updatedRows = new Array();
+        var deletedRows = new Array();
+
+        var dgUsers = $('#dgUsers');
+        var tgDepartment = $("#tgDepartment");
+        var dgUsers_Groups = $("#dgUsers_Groups");
+
+
+        dgUsers.datagrid({
+            url: '/Sys_Users/index',
+            method: 'post',
+            //title: '用户',
+            //iconCls: 'icon-save',
+            dataType: "json",
+            rownumbers: true, //是否加行号
+            pagination: true, //是否显式分页
+            pageSize: 15, //页容量，必须和pageList对应起来，否则会报错
+            pageNumber: 1, //默认显示第几页
+            pageList: [15, 30, 45],//分页中下拉选项的数值
+            fitColumns: true,
+            fit: true,
+            singleSelect: false,
+            columns: [[
+                { field: "chk", checkbox: true },
+                { field: 'Id', title: 'Id', width: 70 },
+                { field: 'TrueName', title: 'TrueName', width: 120, },
+                { field: 'UserName', title: 'UserName', width: 120, },
+                { field: 'Email', title: 'Email', width: 120, },
+                {
+                    field: 'IsDisabled', title: 'IsDisabled', width: 120, formatter: function (value, row, index) {
+                        if (!value) {
+                            return "no";
+                        }
+                        else {
+                            return "yes";
+                        }
+                    }
+                },
+
+            ]],
+        });
+
+        tgDepartment.treegrid({
+            //title: '部门',
+            url: '/Sys_Departments/Index',
+            idField: 'Id',
+            treeField: 'DepartmentName',
+            rownumbers: true, //是否加行号
+            //iconCls: 'icon-save',
+            dataType: "json",
+            border:0,
+            fitColumns: true,
+            fit: true,
+            singleSelect: true,
+            columns: [[
+                //{ field: "chk", checkbox: true },
+                { field: 'Id', title: 'Id', width: 70 },
+                {
+                    field: 'DepartmentName', title: 'DepartmentName', width: 160, editor: { type: 'text' }
+                },
+                { field: 'ParentId', title: 'ParentId', width: 120, hidden: true },
+                { field: 'Remark', title: 'Remark', width: 120, hidden: true },
+                { field: 'SortNum', title: 'SortNum', width: 70, hidden: true},
+
+            ]],
+            onSelect: function (rowData) {
+                dgUsers.datagrid({
+                    //url: '/Sys_Users/index',
+                    //method: 'post',
+                    //title: '用户',
+                    //iconCls: 'icon-save',
+                    //dataType: "json",
+                    //rownumbers: true, //是否加行号
+                    //pagination: true, //是否显式分页
+                    //pageSize: 15, //页容量，必须和pageList对应起来，否则会报错
+                    //pageNumber: 1, //默认显示第几页
+                    //pageList: [15, 30, 45],//分页中下拉选项的数值
+                    //fitColumns: true,
+                    //fit: true,
+                    //singleSelect: false,
+                    queryParams: {
+                        DepartmentId: rowData.Id
+                    }
+
+                });
+            },
+        });
+
+        dgUsers_Groups.datagrid({
+            url: '/Sys_Users_Groups/Users_Groups',
+            method: 'post',
+            //title: '用户',
+            //iconCls: 'icon-save',
+            dataType: "json",
+            queryParams: {
+                Group: JSON.stringify($("#tgGroups").treegrid("getSelections")[0])
+            },
+            rownumbers: true, //是否加行号
+            pagination: true, //是否显式分页
+            pageSize: 15, //页容量，必须和pageList对应起来，否则会报错
+            pageNumber: 1, //默认显示第几页
+            pageList: [15, 30, 45],//分页中下拉选项的数值
+            fitColumns: true,
+            fit: true,
+            singleSelect: false,
+            columns: [[
+                { field: "chk", checkbox: true },
+                { field: 'Id', title: 'Id', width: 70 },
+                { field: 'TrueName', title: 'TrueName', width: 120, },
+                { field: 'UserName', title: 'UserName', width: 120, },
+                { field: 'Email', title: 'Email', width: 120, },
+                {
+                    field: 'IsDisabled', title: 'IsDisabled', width: 120, formatter: function (value, row, index) {
+                        if (!value) {
+                            return "no";
+                        }
+                        else {
+                            return "yes";
+                        }
+                    }
+                },
+
+            ]],
+            onRowContextMenu: function (e, rowIndex, rowData) {
+                e.preventDefault();
+                $('#mm').menu('show', {
+                    left: e.pageX,
+                    top: e.pageY
+                });
+                console.log(rowData);
+
+
+            },
+        });
+
+
+    });
+    function menuHandler(item) {
+        console.log(item.name);
+    }
+</script>
+
+<div data-options="region:'center',title:'',border:false" style="padding:0px;background:#eee;">
+
+    <div id="cc" class="easyui-layout" data-options="border:false" style="width: 100%; height: 100%;">
+        <div data-options="region:'north',title:'小组成员',split:true" style="height:200px;">
+            <table id="dgUsers_Groups"></table>
+        </div>
+        <div data-options="region:'west',iconCls:'icon-save',title:'部门',split:true" style="width:350px;">
+            <table id="tgDepartment"></table>
+        </div>
+        <div data-options="region:'center',iconCls: 'icon-save',title:'职员'" style="padding:5px;background:#eee;">
+            <table id="dgUsers"></table>
+        </div>
+    </div>
+
+</div>
+<div id="mm" class="easyui-menu" data-options="onClick:menuHandler" style="width:120px;">
+    <div data-options="name:'detail',iconCls:'icon-vcard'">详情</div>
+    <div data-options="name:'remove',iconCls:'icon-bullet_cross'">移除</div>
+
+    <div class="menu-sep"></div>
+    <div data-options="name:'exit'">Exit</div>
+</div>

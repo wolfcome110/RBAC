@@ -1,0 +1,151 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@using EF.RBAC.Models
+@model LoginViewModel
+
+<style>
+    .navbar-inverse {
+        background-color: #5CBDE2;
+        border-color: #5CBDE2;
+    }
+
+    .body-content {
+        width: 400px;
+    }
+
+    .error {
+        color: #a94442;
+    }
+</style>
+
+
+<h2 class="text-center">登录</h2>
+<hr />
+<div class="container body-content">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal" id="frmLogin" method="post" action="">
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">用户名</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="txtUserName" name="txtUserName" placeholder="请输入用户名" value="0001" style="width:220px;" />
+                        <span class="errorMsg"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-3 control-label">密码</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" id="txtPassword" name="txtPassword" placeholder="请输入密码" value="123456" style="width:220px;" />
+                        <span class="errorMsg"></span>
+                    </div>
+                </div>
+                <div class="form-group hidden">
+
+                    <label for="inputPassword3" class="col-sm-3 control-label">验证码</label>
+                    <div class="col-sm-9">
+
+                        <input class="form-control" type="text" id="code" name="code" style="width:35%;height:30px;padding:12px;display:inline-block;">
+                        <img style="margin:0 0 0 3px ; vertical-align:middle; height:26px;" src="/Sys_Users/CheckCode" id="imgCode" onclick="this.src = '/Sys_Users/CheckCode?rnd=' + Math.random();" />
+                        <span class="errorMsg"></span>
+                    </div>
+
+                </div>
+                <div class="form-group hidden">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <div class="checkbox">
+                            <input data-val="true" data-val-required="记住我? 字段是必需的。" id="RememberMe" name="RememberMe" type="checkbox" value="true"><input name="RememberMe" type="hidden" value="false">
+                            <label for="RememberMe">记住我?</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button type="button" class="btn btn-default" id="btnLogin">登录</button>
+                    </div>
+                </div>
+                <p>
+                    @Html.ActionLink("注册为新用户", "Register")
+                </p>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    //登录
+    $("#btnLogin").on("click", function () {
+
+ 
+        var r = $("#frmLogin").valid();
+        if (r) {
+            $.ajax({
+                type: "post",
+                url: "/User/login",
+                data: { UserId: "", UserName: $("#txtUserName").val(), Password: $("#txtPassword").val(), ProLine: $("#DropLoginChanXian").selectpicker("val"), Station: $("#DropLoginGangWei").selectpicker("val"), Group: $("#DropLoginBanZhu").selectpicker("val"), Classes: $("#DropLoginBanZhu").selectpicker("val") },
+                beforeSend: function () {
+                    $.messager.wait("提示", "Please Wait...", "info");
+                },
+                success: function (msg) {
+                    var data = msg;
+                    console.log(msg);
+                    if (data.state) {
+                        
+
+                    }
+                    else {
+                        //$(_messager).remove();
+                        $.messager.alert("提示", "用户名或密码不正确，请重新输入。", "error");
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //alert("asdfasd");
+                    $.messager.alert("提示", "出现异常情况，请联系管理员！", "error");
+                }
+
+            });
+        }
+
+    });
+    //登录验证
+    $("#frmLogin").validate({  // #JQForm是form表单的ID
+        rules: {
+            txtUserName: {  // 要验证的表单的id
+                required: true, // 是否是必填项
+                //minlength: 2,  // 最小长度
+                //remote: "/JQValidate/ValidateName",// 返回 true 就会出现错误信息
+            },
+            txtPassword: {
+                required: true, // 是否是必填项
+                //range: [4, 8]
+            },
+
+            //DropLoginBanCi: {
+            //    required: true
+            //}
+        },
+        messages: {// 如果没有给属性错误提示，就会用默认提示
+            txtUserName: {
+                required: "请输入用户名称",  // 如果提交的时候没有填写提示的文字
+                //minlength: "会员名称的长度不能小于2位", // 如果输入的长度小于2提示的文字
+                //remote: "用户名重复"
+            },
+            txtPassword: {
+                required: "请输入密码",
+                //range: "年龄范围是18~30"
+            },
+
+            //DropLoginBanCi: {
+            //    required: "请选择班次"
+            //}
+        },
+        //errorPlacement: function (error, element) { // 自定义错误信息放置的位置
+        //    error.appendTo(element.next("span"));
+        //},
+    });
+</script>

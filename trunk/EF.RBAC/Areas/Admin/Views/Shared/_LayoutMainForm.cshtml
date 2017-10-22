@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
+    <link href="~/Frames/Themes/Styles/desktop.css" rel="stylesheet" />
+    <script src="~/Frames/Themes/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Frames/Frame/Desktop.js"></script>
+    <link href="~/Frames/Themes/Scripts/artDialog/skins/blue.css" rel="stylesheet" type="text/css" />
+    <script src="~/Frames/Themes/Scripts/artDialog/artDialog.source.js" type="text/javascript"></script>
+    <script src="~/Frames/Themes/Scripts/artDialog/iframeTools.source.js" type="text/javascript"></script>
+    <script src="~/Frames/Themes/Scripts/FunctionJS.js"></script>
+    <script>
+        $(function () {
+            AddTabMenu('Imain', '/Home/Desktop', '个人桌面', 'false');
+            GetFirstMenu();
+            $("#topnav li").click(function () {
+                $("#topnav li").find('a').removeClass("onnav")
+                $(this).find('a').addClass("onnav");
+            });
+        })
+        //开始菜单
+        var FirstMenuJson = "";
+        function GetFirstMenu() {
+            var html = "";
+            var index = 0;
+            var css = "";
+            getAjaxGet("MenuData.html", "action=LoadFirstMenu", function (data) {
+                FirstMenuJson = eval("(" + data + ")");
+                $.each(FirstMenuJson, function (i) {
+                    if (FirstMenuJson[i].ParentId == '9f8ce93a-fc2d-4914-a59c-a6b49494108f') {
+                        if (index == 0) {
+                            css = "class=\"active\"";
+                            GetSecond_Menu(FirstMenuJson[i].MenuId);
+                        } else {
+                            css = "";
+                        }
+                        html += "<li onclick=\"GetSecond_Menu('" + FirstMenuJson[i].MenuId + "')\" ><a " + css + " href=\"javascript:;\">"
+                        html += "<img align=\"absMiddle\" src=\"../Themes/Images/32/" + FirstMenuJson[i].Img + "\" />"
+                        html += "" + FirstMenuJson[i].FullName + "</a></li>"
+                        index++;
+                    }
+                });
+            })
+            $("#first_menu").append(html);
+            $("#first_menu a").click(function () {
+                $("#first_menu a").removeClass('active');
+                $(this).addClass('active');
+            });
+        }
+        //开始子菜单
+        function GetSecond_Menu(MenuId) {
+            $("#second_menu").empty();
+            var html = "";
+            $.each(FirstMenuJson, function (i) {
+                if (FirstMenuJson[i].ParentId == MenuId) {
+                    html += "<li onclick=\"AddTabMenu('" + FirstMenuJson[i].MenuId + "', '" + FirstMenuJson[i].NavigateUrl + "', '" + FirstMenuJson[i].FullName + "', 'true');$('#overlay_startmenu').hide();$('#start_menu_panel').slideUp(300);\"><a href=\"javascript:;\"><img align=\"absMiddle\" src=\"../Themes/Images/32/" + FirstMenuJson[i].Img + "\" />" + FirstMenuJson[i].FullName + "</a></li>";
+                }
+            });
+            $("#second_menu").append(html);
+        }
+        //控制面板
+        function Controlpanel() {
+            AddTabMenu('Controlpanel', '/CommonModule/Controlpanel/ControlpanelIndex.html', '控制面板', '5026_settings.html', 'true');
+        }
+
+        /* 请求Ajax 带返回值
+       --------------------------------------------------*/
+        function getAjaxGet(url, parm, callBack) {
+            $.ajax({
+                type: 'get',
+                dataType: "text",
+                url: url,
+                data: parm,
+                cache: false,
+                async: false,
+                success: function (msg) {
+                    callBack(msg);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
