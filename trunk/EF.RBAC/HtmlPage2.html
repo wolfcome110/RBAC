@@ -26,94 +26,101 @@
     <table id="tree"></table>
     <div id="pager"></div>
 
+
+
     <script type="text/javascript">
 
-        jQuery(document).ready(function($) {
-			jQuery('#tree').jqGrid({
-				"url":"data1.json",
-				"colModel":[
-					{
-						"name":"category_id",
-						"index":"accounts.account_id",
-						"sorttype":"int",
-						"key":true,
-						"hidden":true,
-						"width":50
-					},{
-						"name":"name",
-						"index":"name",
-						"sorttype":"string",
-						"label":"Name",
-						"width":170
-					},{
-						"name":"price",
-						"index":"price",
-						"sorttype":"numeric",
-						"label":"Price",
-						"width":90,
-						"align":"right"
-					},{
-						"name":"qty_onhand",
-						"index":"qty_onhand",
-						"sorttype":"int",
-						"label":"Qty",
-						"width":90,
-						"align":"right"
-					},{
-						"name":"color",
-						"index":"color",
-						"sorttype":"string",
-						"label":"Color",
-						"width":100
-					},{
-						"name":"lft",
-						"hidden":true
-					},{
-						"name":"rgt",
-						"hidden":true
-					},{
-						"name":"level",
-						"hidden":true
-					},{
-						"name":"uiicon",
-						"hidden":true
-					}
-				],
-				"width":"780",
-				"hoverrows":false,
-				"viewrecords":false,
-				"gridview":true,
-				"height":"auto",
-				"sortname":"lft",
-				"loadonce":true,
-				"rowNum":100,
-				"scrollrows":true,
-				// enable tree grid
-				"treeGrid":true,
-				// which column is expandable
-				"ExpandColumn":"name",
-				// datatype
-				"treedatatype":"json",
-				// the model used
-				"treeGridModel":"nested",
-				// configuration of the data comming from server
-				"treeReader":{
-					"left_field":"lft",
-					"right_field":"rgt",
-					"level_field":"level",
-					"leaf_field":"isLeaf",
-					"expanded_field":"expanded",
-					"loaded":"loaded",
-					"icon_field":"icon"
-				},
-				"sortorder":"asc",
-				"datatype":"json",
-				"pager":"#pager"
-			});
+	jQuery(document).ready(function($) {
+		jQuery('#tree').jqGrid({
+			"width":"780",
+			"hoverrows":false,
+			"viewrecords":false,
+			"gridview":true,
+			"url":"data1.json",
+			"editurl" : "clientArray",
+			"ExpandColumn":"name",
+			"height":"auto",
+			"sortname":"account_id",
+			"scrollrows":true,
+			"treeGrid":true,
+			"treedatatype":"json",
+			"treeGridModel":"adjacency",
+			"loadonce":true,
+			"rowNum":1000,
+			"treeReader":{
+				"parent_id_field":"parent_id",
+				"level_field":"level",
+				"leaf_field":"isLeaf",
+				"expanded_field":"expanded",
+				"loaded":"loaded",
+				"icon_field":"icon"
+			},
+			"datatype":"json",
+			"colModel":[
+				{
+					"name":"account_id",
+					"key":true,
+					"hidden":true
+				},{
+					"name":"name",
+					"label":"Name",
+					"width":170,
+					"editable":true
+				},{
+					"name":"acc_num",
+					"label":"Number",
+					"width":170,
+					"editable":true
+				},{
+					"name":"debit",
+					"sorttype":"numeric",
+					"label":"Debit",
+					"width":90,
+					"formatter": "number",
+					"align":"right",
+					"editable":true
+				},{
+					"name":"credit",
+					"sorttype":"numeric",
+					"formatter": "number",
+					"label":"Credit",
+					"width":90,
+					"align":"right",
+					"editable":true
+				},{
+					"name":"balance",
+					"sorttype":"numeric",
+					"formatter": "number",
+					"label":"Balance",
+					"width":90,
+					"align":"right",
+					"editable":true
+				},{
+					"name":"parent_id",
+					"hidden":true
+				}
+			],
+			"pager":"#pager"
 		});
-
+		// nable add
+		jQuery('#tree').jqGrid('navGrid','#pager',
+		{
+			"edit":true,
+			"add":true,
+			"del":true,
+			"search":false,
+			"refresh":true,
+			"view":false,
+			"excel":false,
+			"pdf":false,
+			"csv":false,
+			"columns":false
+		},
+		{"drag":true,"resize":true,"closeOnEscape":true,"dataheight":150},
+		{"drag":true,"resize":true,"closeOnEscape":true,"dataheight":150}
+		);
+		jQuery('#tree').jqGrid('bindKeys');
+	});
     </script>
-
-
 </body>
 </html>
