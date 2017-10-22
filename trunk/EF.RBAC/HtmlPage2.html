@@ -22,105 +22,102 @@
     <title>jqTreeGrid - Load On Demand - Load all Rows at once collapsed</title>
 </head>
 <body>
-
     <table id="tree"></table>
     <div id="pager"></div>
 
 
-
     <script type="text/javascript">
 
-	jQuery(document).ready(function($) {
-		jQuery('#tree').jqGrid({
-			"width":"780",
-			"hoverrows":false,
-			"viewrecords":false,
-			"gridview":true,
-			"url":"data1.json",
-			"editurl" : "clientArray",
-			"ExpandColumn":"name",
-			"height":"auto",
-			"sortname":"account_id",
-			"scrollrows":true,
-			"treeGrid":true,
-			"treedatatype":"json",
-			"treeGridModel":"adjacency",
-			"loadonce":true,
-			"rowNum":1000,
-			"treeReader":{
-				"parent_id_field":"parent_id",
-				"level_field":"level",
-				"leaf_field":"isLeaf",
-				"expanded_field":"expanded",
-				"loaded":"loaded",
-				"icon_field":"icon"
-			},
-			"datatype":"json",
-			"colModel":[
+        $('#tree').jqGrid({
+            autowidth:true,
+            width: "780",
+            hoverrows: false,
+            viewrecords: false,
+            gridview: true,
+            url: "data1.json",
+            editurl: "clientArray",
+            ExpandColumn: "name",
+            height: "auto",
+            sortname: "account_id",
+            scrollrows: true,
+            treeGrid: true,
+            treedatatype: "json",
+            treeGridModel: "adjacency",
+            loadonce: true,
+            rowNum: 1000,
+            treeReader: {
+                "parent_id_field": "parent_id",
+                "level_field": "level",
+                "leaf_field": "isLeaf",
+                "expanded_field": "expanded",
+                "loaded": "loaded",
+                "icon_field": "icon"
+            },
+            datatype: "json",
+            colModel: [
 				{
-					"name":"account_id",
-					"key":true,
-					"hidden":true
-				},{
-					"name":"name",
-					"label":"Name",
-					"width":170,
-					"editable":true
-				},{
-					"name":"acc_num",
-					"label":"Number",
-					"width":170,
-					"editable":true
-				},{
-					"name":"debit",
-					"sorttype":"numeric",
-					"label":"Debit",
-					"width":90,
-					"formatter": "number",
-					"align":"right",
-					"editable":true
-				},{
-					"name":"credit",
-					"sorttype":"numeric",
-					"formatter": "number",
-					"label":"Credit",
-					"width":90,
-					"align":"right",
-					"editable":true
-				},{
-					"name":"balance",
-					"sorttype":"numeric",
-					"formatter": "number",
-					"label":"Balance",
-					"width":90,
-					"align":"right",
-					"editable":true
-				},{
-					"name":"parent_id",
-					"hidden":true
+				    name: "account_id",
+				    key: true,
+				    hidden: true
+				}, {
+				    name: "name",
+				    label: "Name",
+				    width: 170,
+				    editable: true
+				}, {
+				    name: "acc_num",
+				    label: "Number",
+				    width: 170,
+				    editable: true
+				}, {
+				    name: "debit",
+				    sorttype: "numeric",
+				    label: "Debit",
+				    width: 90,
+				    formatter: "number",
+				    align: "right",
+				    editable: true
+				}, {
+				    name: "credit",
+				    sorttype: "numeric",
+				    formatter: "number",
+				    label: "Credit",
+				    width: 90,
+				    align: "right",
+				    editable: true
+				}, {
+				    name: "balance",
+				    sorttype: "numeric",
+				    formatter: "number",
+				    label: "Balance",
+				    width: 90,
+				    align: "right",
+				    editable: true
+				}, {
+				    name: "parent_id",
+				    hidden: true
 				}
-			],
-			"pager":"#pager"
-		});
-		// nable add
-		jQuery('#tree').jqGrid('navGrid','#pager',
+            ],
+            "pager": "#pager"
+        });
+        // nable add
+        $('#tree').jqGrid('navGrid', '#pager',
 		{
-			"edit":true,
-			"add":true,
-			"del":true,
-			"search":false,
-			"refresh":true,
-			"view":false,
-			"excel":false,
-			"pdf":false,
-			"csv":false,
-			"columns":false
+		    edit: true,
+		    add: true,
+		    del: true,
+		    search: true,
+		    refresh: true,
+		    view: true,
+		    excel: true,
+		    pdf: false,
+		    csv: false,
+		    columns: false
 		},
-		{"drag":true,"resize":true,"closeOnEscape":true,"dataheight":150},
-		{"drag":true,"resize":true,"closeOnEscape":true,"dataheight":150}
+		{ "drag": true, "resize": true, "closeOnEscape": true, "dataheight": 150 },
+		{ "drag": true, "resize": true, "closeOnEscape": true, "dataheight": 150 }
 		);
-		jQuery('#tree').jqGrid('bindKeys');
-	});
+        $('#tree').jqGrid('bindKeys');
     </script>
 </body>
 </html>
