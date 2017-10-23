@@ -2815,6 +2815,7 @@
     <Content Include="Content\images\ui-icons_e0fdff_256x240.png" />
     <Content Include="Content\images\ui-icons_f5e175_256x240.png" />
     <Content Include="HtmlPage4.html" />
+    <Content Include="HtmlPage5.html" />
     <Content Include="Scripts\bootstrap-select.js" />
     <Content Include="Scripts\bootstrap-select.min.js" />
     <Content Include="Scripts\bootstrap-table\bootstrap-table.js" />
