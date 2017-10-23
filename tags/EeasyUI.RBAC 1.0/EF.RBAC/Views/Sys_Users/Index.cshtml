@@ -1,0 +1,618 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmins.cshtml";
+}
+
+<div data-options="region:'center',title:''" style="padding:0px;background:#eee;">
+    <table id="dgUsers"></table>
+</div>
+<div id="dlgUserDepartments" style="padding:5px">
+    <table id="tgDepartments"></table>
+</div>
+
+<div id="dlgUserRoles" style="padding:5px">
+    <table id="tgRoles"></table>
+</div>
+
+<div id="dlgUserNavBtns" style="padding:5px">
+    <table id="tgNavigations"></table>
+</div>
+
+<div id="dlgHelper"></div>
+
+<div id="toolbar" style="height:28px;">
+    @Html.Raw(ViewBag.UserAuthority)
+</div>
+
+<script>
+    
+    var dgUsers = $('#dgUsers');
+    var dlgUserDepartments = $("#dlgUserDepartments");
+    var tgDepartments = $("#tgDepartments");
+    var dlgUserRoles = $("#dlgUserRoles");
+    var tgRoles = $("#tgRoles");
+    var tgNavigations = $("#tgNavigations");
+    var dlgUserNavBtns = $("#dlgUserNavBtns")
+    var buttons = [];
+    //加载操作权限
+    (function () {
+        $.ajax({
+            url: "/Sys_Buttons/index",
+            type: "post",
+            //data: data,
+            success: function (data, textStatus, jqXHR) {
+
+                //{ field: 'itemid', title: 'Item ID', width: 80 },
+                for (var i in data.rows) {
+                    buttons.push({
+                        field: data.rows[i].ButtonTag,
+                        title: data.rows[i].ButtonText,
+                        align: "center",
+                        formatter: function (value, row, index) {
+                            if (value == "√") {
+                                return '<font color=\"#39CB00\"><b>' + value + '</b></font>';
+                            }
+                            else {
+                                return value;
+                            }
+                        },
+                        editor: {
+                            type: "checkbox", options: {
+                                on: "√",
+                                off: "x"
+                            }
+                        },
+                    });
+                }
+
+            },
+        });
+    })();
+
+    dgUsers.datagrid({
+        url: 'index',
+        method: 'post',
+        title: '用户管理',
+        iconCls: 'icon-save',
+        dataType: "json",
+        rownumbers: true, //是否加行号
+        pagination: true, //是否显式分页
+        pageSize: 15, //页容量，必须和pageList对应起来，否则会报错
+        pageNumber: 2, //默认显示第几页
+        pageList: [15, 30, 45],//分页中下拉选项的数值
+        border:0,
+        fit:true,
+        fitColumns: true,
+        singleSelect: false,
+        columns: [[
+            { field: "chk", checkbox: true },
+            { field: 'Id', title: 'Id', width: 70 },
+            {
+                field: 'UserName', title: 'UserName', width: 120, editor: {
+                    type: 'validatebox', options: {
+                        required: true, validType: ['length[6,50]']
+                    }
+                }
+            },
+            { field: 'Password', title: 'Password', width: 120, editor: { type: 'validatebox', validType: ['length[6,50]'] } },
+            { field: 'PassSalt', title: 'PassSalt', width: 120, editor: { type: 'validatebox', validType: ['length[0,6]'] } },
+            { field: 'Email', title: 'Email', width: 120, editor: { type: 'text' } },
+            {
+                field: 'IsDisabled', title: 'IsDisabled', width: 120, editor: {
+                    type: 'checkbox', options: {
+                        on: true,
+                        off: false
+                    }
+                }, formatter: function (value, row, index) {
+                    if (!value) {
+                        return "no";
+                    }
+                    else {
+                        return "yes";
+                    }
+                }
+            },
+            { field: 'TrueName', title: 'TrueName', width: 120, editor: { type: 'text' } },
+            { field: 'Mobile', title: 'Mobile', width: 120, editor: { type: 'text' } },
+            { field: 'QQ', title: 'QQ', width: 120, editor: { type: 'text' } },
+            { field: 'Remark', title: 'Remark', width: 120, editor: { type: 'text' } },
+            { field: 'Mobile', title: 'Mobile', width: 120, editor: { type: 'text' } },
+            {
+                field: 'AddTime', title: 'AddTime', width: 150, formatter: function (value, row, index) {
+                    if (value == null) return;
+                    var date = value.substr(1, value.length - 2);
+                    date = value.substr(1, value.length - 2);
+                    date = eval('(new ' + date + ');');
+                    return date.format("yyyy-MM-dd HH:mm:ss");
+                }
+            },
+        ]],
+        toolbar: "#toolbar"
+    });
+
+    //ecs按键退出修改
+    $(window).keydown(function (event) {
+        //console.log(event.keyCode);
+        switch (event.keyCode) {
+            case 27:
+                dgUsers.datagrid('rejectChanges');
+        }
+    });
+
+    var toolbar = {
+        add: function ($dg) {
+            //if (editIndex != undefined) return;
+            //var date = new Date().format("yyyyMMddHHmmssll");
+
+            $dg.datagrid('appendRow', { PassSalt: "000000" });
+            var editIndex = $dg.datagrid('getRows').length - 1;
+            //console.log(dgUsers.datagrid('selectRow', editIndex));
+
+            //if ($.inArray(editIndex, insertedRowsIndex) == -1) {
+            //    insertedRowsIndex.push(editIndex);
+            //}
+            //console.log(insertedRowsIndex);
+            $dg.datagrid('selectRow', editIndex).datagrid('beginEdit', editIndex);
+        },//初级添加会员
+        edit: function ($dg) {
+            var rows = $dg.datagrid('getSelections');
+            for (var i in rows) {
+                var rowIndex = $dg.datagrid("getRowIndex", rows[i]);
+                $dg.datagrid('beginEdit', rowIndex);
+            }
+        },//初级修改会员信息
+        delete: function ($dg) {
+            //console.log(dgUsers.datagrid("getSelections"));
+            var rows = $dg.datagrid("getSelections");
+
+            $.each(rows, function (i, data) {
+                var rowIndex = $dg.datagrid("getRowIndex", data);
+                $dg.datagrid("deleteRow", rowIndex);
+            });
+        },//初级删除
+        restore: function ($dg) {
+            $dg.datagrid('rejectChanges');
+        },//还原添加，修改，删除的操作
+        save: function ($dg) {
+            for (var i = 0; i < $dg.datagrid('getRows').length; i++) {
+                $dg.datagrid('endEdit', i);
+            }
+
+            var rows = $dg.datagrid('getChanges');
+
+            var insertedRows = $dg.datagrid("getChanges", "inserted");
+            var updatedRows = $dg.datagrid("getChanges", "updated");
+            var deletedRows = $dg.datagrid("getChanges", "deleted");
+            var data = new Object;
+            if (insertedRows.length) {
+                data["insertedRows"] = JSON.stringify(insertedRows);
+            }
+
+            if (updatedRows.length) {
+                data["updatedRows"] = JSON.stringify(updatedRows);
+            }
+
+            if (deletedRows.length) {
+                data["deletedRows"] = JSON.stringify(deletedRows);
+            }
+
+            $dg.datagrid('acceptChanges');//此句是提交表单，如果不提交，getChanges方法会返回所有未提交的数据
+            $dg.datagrid("unselectAll");
+
+            insertedRowsIndex = [];
+            updatedRowsIndex = [];
+
+
+            console.log(data);
+
+            if (rows.length > 0) {
+                //更新数据库
+                $.ajax({
+                    url: "BatchSave",
+                    type: "post",
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+                        console.log(data);
+
+                        $.messager.alert('提示', data.Message, 'info');
+
+                        if (data.success) {
+                            //dgUsers.datagrid("reload");
+                        }
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMsg) {
+                        // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                        // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                        // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                        alert("请求失败：" + errorMsg);
+                    }
+                });
+            }
+        },//保存添加，修改，删除的操作
+        search: function ($dg) { },//Remark
+        browser: function ($dg) { },//
+        inport: function ($dg) { },//
+        export: function ($dg) { },//
+        roles: function ($dg) {
+            var users = $dg.datagrid("getSelections");
+            if (users.length == 0) {
+                $.messager.alert("提示", "请选择用户", "info");
+                return;
+            }
+
+            tgRoles.treegrid({
+                //title: '角色',
+                url: '/Sys_Roles/index',
+                idField: 'Id',
+                treeField: 'RoleName',
+                rownumbers: true, //是否加行号
+                iconCls: 'icon-save',
+                dataType: "json",
+                fitColumns: true,
+                fit: true,
+                singleSelect: false,
+                columns: [[
+                    { field: "chk", checkbox: true },
+                    { field: 'Id', title: 'Id', width: 70 },
+                    { field: 'RoleName', title: 'RoleName', width: 120, },
+                    { field: 'ParentId', title: 'ParentId', width: 120, hidden: true },
+                ]],
+                onLoadSuccess: function (row, data) {
+                    var tgRole = $(this);
+                    var userInfo = users[0];
+                    console.log("userInfo", userInfo);
+
+                    $.ajax({
+                        url: "/Sys_Users_Roles/Users_Roles",
+                        data: userInfo,
+                        type: "post",
+                        success: function (data, textStatus, jqXHR) {
+                            console.log("Users_Roles", data);
+                            //$.messager.alert('提示', data.Message, 'info');
+
+                            if (data.success) {
+                                //$("#dg").datagrid("reload");
+                                tgRole.treegrid("unselectAll");
+                                for (var i in data.rows) {
+                                    tgRole.treegrid("select", data.rows[i]["Id"]);
+                                }
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorMsg) {
+                            // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                            // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                            // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                            alert("请求失败：" + errorMsg);
+                        }
+
+                    });
+
+                },
+            });
+
+
+            dlgUserRoles.dialog({
+                title: "分配角色",
+                iconCls: 'icon-cog',
+                width: 500,
+                height: 550,
+                modal: true,
+                buttons: [{
+                    iconCls: 'icon-ok',
+                    text: 'Ok',
+                    handler: function () {
+
+                        var roles = tgRoles.treegrid("getSelections");
+                        if (roles.length == 0) {
+                            $.messager.alert("提示", "请选择角色", "info");
+                            return;
+                        }
+
+                        var d = {};
+                        //var d = new Object
+                        d["Users"] = JSON.stringify(users);
+                        d["Roles"] = JSON.stringify(roles);
+                        console.log(d);
+                        //return;
+                        $.ajax({
+                            url: "/Sys_Users_Roles/Save",
+                            type: "post",
+                            data: d,
+                            success: function (data, textStatus, jqXHR) {
+                                console.log(data);
+                                if (data.success) { }
+                                $.messager.alert('提示', data.Message, 'info');
+
+                                if (data.success) {
+                                    //$("#dg").datagrid("reload");
+                                }
+                            },
+                            error: function (jqXHR, textStatus, errorMsg) {
+                                // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                                // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                                // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                                alert("请求失败：" + errorMsg);
+                            }
+                        });
+
+                        dlgUserRoles.dialog("close");
+                    }
+                }, {
+                    iconCls: 'icon-cancel',
+                    text: 'Cancel',
+                    handler: function () {
+                        dlgUserRoles.dialog("close");
+                    }
+                }],
+
+            });
+        },//分配用户的角色
+        departments: function ($dg) {
+            var users = $dg.datagrid("getSelections");
+
+            if (users.length == 0) {
+                $.messager.alert('提示', '请选择用户', 'info');
+                return;
+            }
+            //console.log(users);
+
+            //部门
+            tgDepartments.treegrid({
+                //title: '部门管理',
+                url: '/Sys_Departments/Index',
+                idField: 'Id',
+                treeField: 'DepartmentName',
+                rownumbers: true, //是否加行号
+                iconCls: 'icon-save',
+                dataType: "json",
+                fitColumns: true,
+                fit: true,
+                singleSelect: false,
+                columns: [[
+                    { field: "chk", checkbox: true },
+                    { field: 'Id', title: 'Id', width: 70 },
+                    { field: 'DepartmentName', title: 'DepartmentName', width: 160, },
+                    { field: 'ParentId', title: 'ParentId', width: 120, hidden: true },
+                    { field: 'SortNum', title: 'SortNum', width: 70, hidden: true },
+                ]],
+                onLoadSuccess: function (row, data) {
+                    var tgDept = $(this);
+                    var userInfo = users[0];
+
+                    $.ajax({
+                        url: "/Sys_Users_Departments/User_Departments",
+                        data: userInfo,
+                        type: "post",
+                        success: function (data, textStatus, jqXHR) {
+                            console.log("Users_Departments", data);
+                            //$.messager.alert('提示', data.Message, 'info');
+
+                            if (data.success) {
+                                //$("#dg").datagrid("reload");
+                                for (var i in data.rows) {
+                                    tgDept.treegrid("select", data.rows[0]["Id"]);
+                                }
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorMsg) {
+                            // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                            // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                            // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                            alert("请求失败：" + errorMsg);
+                        }
+
+                    });
+
+                }
+            });
+            
+            dlgUserDepartments.dialog({
+                title: "部门",
+                iconCls: 'icon-cog',
+                width: 500,
+                height: 550,
+                modal: true,
+                buttons: [{
+                    iconCls: 'icon-ok',
+                    text: 'Ok',
+                    handler: function () {
+                        var dept = tgDepartments.treegrid("getSelections");
+                        if (dept.length == 0) {
+                            $.messager.aler("提示", "请选择部门", "info");
+                            return;
+                        }
+
+                        var d = {};
+                        //var d = new Object
+                        d["Users"] = JSON.stringify(users);
+                        d["Departments"] = JSON.stringify(dept);
+                        console.log(d);
+
+                        $.ajax({
+                            url: "/Sys_Users_Departments/Save",
+                            type: "post",
+                            data: d,
+                            success: function (data, textStatus, jqXHR) {
+                                console.log(data);
+                                if (data.success) { }
+                                $.messager.alert('提示', data.Message, 'info');
+
+                                if (data.success) {
+                                    //$("#dg").datagrid("reload");
+                                }
+                            },
+                            error: function (jqXHR, textStatus, errorMsg) {
+                                // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                                // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                                // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                                alert("请求失败：" + errorMsg);
+                            }
+                        });
+
+
+                        dlgUserDepartments.dialog("close");
+                    }
+                }, {
+                    iconCls: 'icon-cancel',
+                    text: 'Cancel',
+                    handler: function () {
+                        dlgUserDepartments.dialog("close");
+                    }
+                }],
+            });
+
+            //var a = $(window.parent.document);
+            
+        },//分配用户的部门
+        authority: function ($dg) {
+            var rows = $dg.datagrid("getSelections");
+            if (rows.length == 0) {
+                $.messager.alert('提示', '请选择需要配置的职员！', 'info');
+                return;
+            }
+
+            tgNavigations.treegrid({
+                //title: 'Sys_Navigations',
+                url: '/Sys_NavButtons/GetUserNavBtns',
+                queryParams: {
+                    UserId: rows[0].Id,
+                },
+                idField: 'Id',
+                treeField: 'NavTitle',
+                rownumbers: true, //是否加行号
+                iconCls: 'icon-save',
+                dataType: "json",
+                width: 1000,
+                height: 500,
+                fitColumns: true,
+                fit: true,
+                singleSelect: false,
+                frozenColumns: [[
+                    //{ field: "chk", checkbox: true },
+                    { field: 'Id', title: 'Id', width: 70 },
+                    { field: 'NavTitle', title: 'NavTitle', width: 160, },
+                ]],
+                columns: [
+                    buttons
+                ],
+                onLoadSuccess: function (row, data) {
+                    console.log("getData", data);
+                },
+                onClickRow: function (row) {
+                    console.log(row.Buttons);
+                    $(this).treegrid("beginEdit", row.Id);
+                    var editors = $(this).treegrid('getEditors', row.Id);
+
+                    var columns = $(this).treegrid("options").columns;
+                    $.Enumerable.From(columns[0]).ToArray().forEach(function (i) {
+
+                        var isExist = $.Enumerable.From(row.Buttons).Contains(i.field);
+                        $.Enumerable.From(editors).ToArray().forEach(function (ii) {
+                            if (!isExist && ii.field == i.field) {
+                                $(ii.target).remove();
+                            }
+                        });
+                    });
+                },
+                toolbar: [{
+                    text: '添加',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        console.log(tgNavigations.treegrid("getData"));
+
+                    }
+                }],
+            }).treegrid("unselectAll");
+
+            dlgUserNavBtns.dialog({
+                title: "分配权限",
+                iconCls: 'icon-cog',
+                width: 900,
+                height: 550,
+                modal: true,
+                buttons: [{
+                    iconCls: 'icon-ok',
+                    text: 'Ok',
+                    handler: function () {
+                        for (var i in tgNavigations.treegrid('getSelections')) {
+                            var obj = tgNavigations.treegrid('getSelections')[i];
+                            tgNavigations.treegrid('endEdit', obj.Id);
+                        }
+                        var rows = tgNavigations.treegrid("getChanges");
+                        console.log(rows);
+                        var data = new Object();
+                        data["Users"] = JSON.stringify($dg.datagrid("getSelections"));
+                        data["Navigations"] = JSON.stringify(rows);
+                        console.log(data);
+
+                        //更新数据库
+                        $.ajax({
+                            url: "/Sys_UserNavBtns/UserNavBtns",
+                            type: "post",
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+                                console.log(data);
+
+                                $.messager.alert('提示', data.Message, 'info');
+
+                                if (data.success) {
+                                    tgNavigations.datagrid('acceptChanges');//此句是提交表单，如果不提交，getChanges方法会返回所有未提交的数据
+                                    tgNavigations.datagrid("unselectAll");
+
+                                    insertedRows = [];
+                                    updatedRows = [];
+                                    deletedRows = [];
+
+                                }
+                            },
+                            error: function (jqXHR, textStatus, errorMsg) {
+                                // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                                // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                                // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                                alert("请求失败：" + errorMsg);
+                                insertedRows = [];
+                                updatedRows = [];
+                                deletedRows = [];
+                            }
+                        });
+                        //dlgRoleNavBtns.dialog("close");
+                    }
+                }, {
+                    iconCls: 'icon-cancel',
+                    text: 'Cancel',
+                    handler: function () {
+                        dlgUserNavBtns.dialog("close");
+                    }
+                }],
+            });
+        },//分配用户的操作权限
+        help: function ($dg) {
+            $('#dlgHelper').dialog({
+                title: '帮助',
+                iconCls: 'icon-help',
+                width: 800,
+                height: 500,
+                closed: false,
+                cache: false,
+                href: '/Sys_Helper/index#role',
+                modal: true
+            });
+        },//
+    };
+
+    $("#toolbar").find("#btn_Add").on("click", function () { toolbar.add($('#dgUsers')); });
+    $("#toolbar").find("#btn_Edit").on("click", function () { toolbar.edit($('#dgUsers')); });
+    $("#toolbar").find("#btn_Delete").on("click", function () { toolbar.delete($('#dgUsers')); });
+    $("#toolbar").find("#btn_Restore").on("click", function () { toolbar.restore($('#dgUsers')); });
+    $("#toolbar").find("#btn_Save").on("click", function () { toolbar.save($('#dgUsers')); });
+    $("#toolbar").find("#btn_Search").on("click", function () { toolbar.search($('#dgUsers')); });
+    $("#toolbar").find("#btn_Browser").on("click", function () { toolbar.browser($('#dgUsers')); });
+    $("#toolbar").find("#btn_Inport").on("click", function () { toolbar.inport($('#dgUsers')); });
+    $("#toolbar").find("#btn_Export").on("click", function () { toolbar.export($('#dgUsers')); });
+    $("#toolbar").find("#btn_Roles").on("click", function () { toolbar.roles($('#dgUsers')); });
+    $("#toolbar").find("#btn_Departments").on("click", function () { toolbar.departments($('#dgUsers')); });
+    $("#toolbar").find("#btn_Authority").on("click", function () { toolbar.authority($('#dgUsers')); });
+    $("#toolbar").find("#btn_Help").on("click", function () { toolbar.help($('#dgUsers')); });
+</script>

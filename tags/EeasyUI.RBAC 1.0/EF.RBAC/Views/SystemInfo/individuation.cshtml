@@ -1,0 +1,124 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmins.cshtml";
+}
+
+
+<link href="../../Themes/Styles/Style-2.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    * {
+        font-size: 9pt;
+    }
+    body {
+        margin: 0px;
+        padding: 0px;
+        font-family: 微软雅黑, 宋体, Arial, Helvetica, Verdana, sans-serif;
+        color: #000000;
+    }
+    .btnbartitle {
+        border-top: #ccc 1px solid;
+        border-left: #ccc 1px solid;
+        border-right: #ccc 1px solid;
+        padding-bottom: 1px;
+        background-repeat: repeat-x;
+        height: 27px;
+        font-weight: bold;
+    }
+    .btnbartitle div {
+        color: #666;
+        padding: 5px;
+        FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#f8f8f8,endColorStr=#e2e4e6); /*IE 6 7 8*/
+        background: -ms-linear-gradient(top, #f8f8f8, #e2e4e6); /* IE 10 */
+        background: -moz-linear-gradient(top,#f8f8f8,#e2e4e6); /*火狐*/
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#f8f8f8), to(#e2e4e6)); /*谷歌*/
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f8f8f8), to(#e2e4e6)); /* Safari 4-5, Chrome 1-9*/
+        background: -webkit-linear-gradient(top, #f8f8f8, #e2e4e6); /*Safari5.1 Chrome 10+*/
+        background: -o-linear-gradient(top, #f8f8f8, #e2e4e6); /*Opera 11.10+*/
+    }
+    .line {
+        margin: 0px auto;
+        height: 1px;
+        background: #ccc;
+    }
+    .select {
+        background-image: url('../images/input_text_bg.gif');
+        background-repeat: repeat-x;
+        background-position: top;
+        padding-top: 0px;
+        border: 1px solid #A8A8A8;
+        height: 25px;
+        line-height: 21px;
+    }
+    .l-btn-text {
+        font-size: 15px;
+    }
+    .l-btn-left {
+        padding: 5px;
+    }
+</style>
+<form method="post">
+    <div class="btnbartitle">
+        <div>
+            请先确认您的浏览器启用了 cookie，否则无法使用个性化设置
+        </div>
+    </div>
+    <div class="line"></div>
+    <div class="div-body">
+        <div style="padding-left: 20px; padding-right: 20px; padding-top: 5px;">
+            <div style="padding: 5px; margin-left: 10px;">
+                <label style="font-size: 20px; font-weight: bold; color: gray;">
+                    语言设置
+                </label>
+            </div>
+            <div class="line" style="height: 2px;">
+            </div>
+            <div style="padding-top: 20px; padding-bottom: 15px; padding-left: 100px;">
+                语言首选项：<select name="Language_Type" id="Language_Type" class="select" style="width: 200px">
+                    <option value="中文简体 [zh-CN]">中文简体 [zh-CN]</option>
+                    <option value="英语(美国) [en_US]">英语(美国) [en_US]</option>
+                </select>
+            </div>
+            <div style="padding: 5px; margin-left: 10px;">
+                <label style="font-size: 20px; font-weight: bold; color: gray;">
+                    界面主题
+                </label>
+            </div>
+            <div class="line" style="height: 2px;">
+            </div>
+            <div style="padding-top: 20px; padding-bottom: 15px; padding-left: 100px;">
+                &nbsp;&nbsp; 界面主题：<select name="WebUI_Type" id="WebUI_Type" class="select" style="width: 200px">
+                    <option value="0">默认皮肤</option>
+                    <option value="1">蓝色皮肤</option>
+                    <option value="2">深蓝色皮肤</option>
+                    <option value="3">咖啡色皮肤</option>
+                </select>
+            </div>
+            <div style="padding-top: 20px; padding-bottom: 15px; padding-left: 100px;">
+                &nbsp;&nbsp; 背景图片：<select name="Select1" id="Select1" class="select" style="width: 200px">
+                    <option value="0">默认皮肤</option>
+                    <option value="1">蓝色皮肤</option>
+                    <option value="2">深蓝色皮肤</option>
+                    <option value="3">咖啡色皮肤</option>
+                </select>
+            </div>
+            <div style="padding: 5px; margin-left: 10px;">
+                <label style="font-size: 20px; font-weight: bold; color: gray;">
+                    界面风格
+                </label>
+            </div>
+            <div class="line" style="height: 2px;">
+            </div>
+            <div style="padding-top: 20px; padding-bottom: 15px; padding-left: 100px;">
+                &nbsp;&nbsp; 表现方式：<select name="Menu_Type" id="Menu_Type" class="select" style="width: 200px">
+                    <option value="0">默认导航</option>
+                    <option value="1">手风琴菜单(2级)</option>
+                    <option value="2">Top+Left菜单(2级)</option>
+                    <option value="3">树形结构菜单(无限级)</option>
+                </select>
+            </div>
+            <div style="padding-top: 30px; padding-left: 180px;">
+        
+                <a id="btn" href="#" class="easyui-linkbutton" onclick="alert('正在开发中')" data-options="">保存设置</a> 
+            </div>
+        </div>
+    </div>
+</form>

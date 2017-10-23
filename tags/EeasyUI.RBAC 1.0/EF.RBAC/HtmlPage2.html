@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="/Scripts/jquery-easyui-1.4.1/themes/gray/easyui.css" rel="stylesheet" />
+    <link href="/Scripts/jquery-easyui-1.4.1/themes/icon.css" rel="stylesheet" />
+    <link href="/Content/icons-customed/icon.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    <script src="/Scripts/jquery-1.9.1.min.js"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="/Scripts/jquery-2.2.1.min.js"></script>
+    <!--<![endif]-->
+    <script src="/Scripts/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>
+    <script src="/Scripts/jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/Scripts/jquery.linq.min.js"></script>
+    <script src="/Scripts/jquery.cookie-1.4.1.min.js"></script>
+    <script src="/Scripts/prototype.js"></script>
+    <script src="Scripts/tools.js"></script>
+</head>
+<body>
+
+    <script>
+        console.log(top.$("#dlgNavBtns").text());
+        //$("<div/>").css({ "background": "#F2F2F2", "border-width": "0px", "line-height": "30px", "text-align": "center" }).text("xxxxx").appendTo($(window.top.document.body)).window("open");
+        var a = tools.waiting();
+        setTimeout(function () {
+            tools.close(a);
+        }, 2000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="98f97d49020c439aaec2693b5981a987" Name="RBAC_Model" DisplayType="true" ShowGrid="true">
+        <EntityTypeShape EntityType="RBACModel.Sys_Buttons" Width="1.875" PointX="9.375" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="RBACModel.Sys_Departments" Width="2.125" PointX="16" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RBACModel.Sys_Groups" Width="1.875" PointX="4" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RBACModel.Sys_LogDetails" Width="2.125" PointX="13.125" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RBACModel.Sys_Logs" Width="2.25" PointX="9.875" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RBACModel.Sys_LogSettings" Width="2" PointX="6.875" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RBACModel.Sys_Navigations" Width="2" PointX="6.375" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="RBACModel.Sys_Roles" Width="1.75" PointX="15.375" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="RBACModel.Sys_Users" Width="2.125" PointX="9.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RBACModel.sysdiagrams" Width="1.5" PointX="13.125" PointY="1.375" IsExpanded="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_ButtonsSys_GroupNavBtns" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_ButtonsSys_NavButtons" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_ButtonsSys_RoleNavBtns" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_ButtonsSys_UserNavBtns" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_DepartmentsSys_Roles_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_DepartmentsSys_Users_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_GroupsSys_GroupNavBtns" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_NavigationsSys_GroupNavBtns" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_Users_GroupsSys_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_LogDetailsSys_Logs" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_LogSettingsSys_Logs" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_UsersSys_Logs" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_NavigationsSys_NavButtons" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_NavigationsSys_RoleNavBtns" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_NavigationsSys_UserNavBtns" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_RolesSys_RoleNavBtns" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_RolesSys_Roles_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_RolesSys_UserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_UsersSys_UserNavBtns" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_UsersSys_UserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_UsersSys_Users_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_UsersSys_Users_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="RBACModel.FK_Sys_LogDetails_Sys_Logs" />
+        <AssociationConnector Association="RBACModel.FK_Sys_Logs_Sys_LogSettings" />
+        <AssociationConnector Association="RBACModel.FK_Sys_Logs_Sys_Users" />
+        <EntityTypeShape EntityType="RBACModel.Sys_Users_Groups" Width="2.125" PointX="6.75" PointY="5.875" />
+        <AssociationConnector Association="RBACModel.FK_Sys_Users_Groups_Sys_Groups" />
+        <AssociationConnector Association="RBACModel.FK_Sys_Users_Groups_Sys_Users" />
+        <EntityTypeShape EntityType="RBACModel.Sys_GroupNavBtns" Width="2" PointX="3.75" PointY="8.25" />
+        <AssociationConnector Association="RBACModel.FK_Sys_GroupNavBtns_Sys_Buttons" />
+        <AssociationConnector Association="RBACModel.FK_Sys_GroupNavBtns_Sys_Groups" />
+        <AssociationConnector Association="RBACModel.FK_Sys_GroupNavBtns_Sys_Navigations" />
+        <EntityTypeShape EntityType="RBACModel.Sys_Users_Departments" Width="2" PointX="13" PointY="7.375" />
+        <AssociationConnector Association="RBACModel.FK_Sys_Users_Departments_Sys_Departments" />
+        <AssociationConnector Association="RBACModel.FK_Sys_Users_Departments_Sys_Users" />
+        <EntityTypeShape EntityType="RBACModel.Sys_UserNavBtns" Width="2" PointX="6.75" PointY="10.625" />
+        <AssociationConnector Association="RBACModel.FK_Sys_UserNavBtns_Sys_Buttons" />
+        <AssociationConnector Association="RBACModel.FK_Sys_UserNavBtns_Sys_Navigations" />
+        <AssociationConnector Association="RBACModel.FK_Sys_UserNavBtns_Sys_Users" />
+        <EntityTypeShape EntityType="RBACModel.Sys_Roles_Departments" Width="2" PointX="16.5" PointY="10.625" />
+        <AssociationConnector Association="RBACModel.FK_Sys_Roles_Departments_Sys_Departments" />
+        <AssociationConnector Association="RBACModel.FK_Sys_Roles_Departments_Sys_Roles" />
+        <EntityTypeShape EntityType="RBACModel.Sys_RoleNavBtns" Width="2.125" PointX="12.25" PointY="14" />
+        <AssociationConnector Association="RBACModel.FK_Sys_RoleNavBtns_Sys_Buttons" />
+        <AssociationConnector Association="RBACModel.FK_Sys_RoleNavBtns_Sys_Navigations" />
+        <AssociationConnector Association="RBACModel.FK_Sys_RoleNavBtns_Sys_Roles" />
+        <EntityTypeShape EntityType="RBACModel.Sys_NavButtons" Width="2" PointX="6.375" PointY="18.75" />
+        <AssociationConnector Association="RBACModel.FK_Sys_NavButtons_Sys_Buttons" />
+        <AssociationConnector Association="RBACModel.FK_Sys_NavButtons_Sys_Navigations" />
+        <EntityTypeShape EntityType="RBACModel.Sys_Users_Roles" Width="1.75" PointX="13" PointY="10.375" />
+        <AssociationConnector Association="RBACModel.FK_Sys_Users_Roles_Sys_Roles" />
+        <AssociationConnector Association="RBACModel.FK_Sys_Users_Roles_Sys_Users" />
+        <EntityTypeShape EntityType="RBACModel.Sys_Parameter" Width="2" PointX="1.25" PointY="1.25" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

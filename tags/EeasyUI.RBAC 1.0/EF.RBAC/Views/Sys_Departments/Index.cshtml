@@ -1,0 +1,218 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmins.cshtml";
+}
+
+<script src="~/Scripts/jquery-easyui-1.4.1/treegrid-dnd/enableDnd.js"></script>
+
+<div data-options="region:'center',title:''" style="padding:0px;background:#eee;">
+    <table id="tgDeparments"></table>
+</div>
+
+<!-- 工具栏 -->
+<div id="toolbar" style="height:28px;">
+    @Html.Raw(ViewBag.UserAuthority)
+</div>
+
+<script>
+    var insertedRows = new Array();
+    var updatedRows = new Array();
+    var deletedRows = new Array();
+
+    var tgDeparments = $("#tgDeparments")
+    tgDeparments.treegrid({
+        title: '部门管理',
+        url: '/Sys_Departments/Index',
+        idField: 'Id',
+        treeField: 'DepartmentName',
+        rownumbers: true, //是否加行号
+        border:0,
+        iconCls: 'icon-save',
+        dataType: "json",
+        fitColumns: true,
+        singleSelect: false,
+        columns: [[
+            //{ field: "chk", checkbox: true },
+            { field: 'Id', title: 'Id', width: 70 },
+            {
+                field: 'DepartmentName', title: 'DepartmentName', width: 160, editor: { type: 'text' }
+            },
+            { field: 'ParentId', title: 'ParentId', width: 120, hidden: true },
+            { field: 'Remark', title: 'Remark', width: 120, editor: { type: 'text' } },
+            {
+                field: 'AddTime', title: 'AddTime', width: 150, formatter: function (value, row, index) {
+                    if (value == "" || value == undefined)
+                        return;
+                    var date = value.substr(1, value.length - 2);
+                    date = value.substr(1, value.length - 2);
+                    date = eval('(new ' + date + ');');
+                    return date.format("yyyy-MM-dd HH:mm:ss");
+                }
+            },
+            { field: 'SortNum', title: 'SortNum', width: 70, editor: { type: 'numberbox' } },
+
+        ]],
+        onLoadSuccess: function (row) {
+            //$(this).treegrid('enableDnd', row ? row.id : null);
+            enableDnd($(this));
+        },
+        onBeforeEdit: function (row) {
+            $(this).treegrid('disableDnd');
+        },
+        onAfterEdit: function (row) {
+            $(this).treegrid('enableDnd');
+        },
+        onCancelEdit: function (row) {
+            $(this).treegrid('enableDnd');
+        },
+        onDblClickRow: function (row) {
+            //tgDeparments.treegrid("beginEdit", row.Id);
+        },
+        toolbar: "#toolbar"
+    });
+
+
+    var toolbar = {
+        add: function ($dg) {
+            //$("#edit,#delete").linkbutton("disable");
+            var date = new Date();
+            var newId = "ID" + date.format("yyyyMMddHHmmssll");
+            var rows = $dg.treegrid("getSelections");
+            if (rows.length == 0) {
+                $dg.treegrid('append', { parent: 0, data: [{ Id: newId, DepartmentName: "NewDepartmentName", SortNum: 0 }] }).treegrid("beginEdit", newId);
+            }
+            else {
+                for (var i in rows) {
+                    newId = "ID" + Math.floor(Math.random() * 1000);
+                    $dg.treegrid('append', { parent: rows[i].Id, data: [{ Id: newId, DepartmentName: "NewDepartmentName", SortNum: 0, ParentId: rows[i].Id }] }).treegrid("beginEdit", newId);
+                }
+            }
+
+
+            //tgDeparments.treegrid("beginEdit", 1);
+        },//Remark
+        edit: function ($dg) {
+            //$("#add,#delete").linkbutton("disable");
+            var rows = $dg.treegrid("getSelections");
+            for (var i in rows) {
+                $dg.treegrid("beginEdit", rows[i].Id);
+            }
+        },//
+        delete: function ($dg) {
+            //$("#add,#edit").linkbutton("disable");
+            //console.log($("#dg").datagrid("getSelections"));
+            var rows = $dg.treegrid("getSelections");
+            var ids = new Array();
+            for (var i in rows) {
+                ids.push(rows[i].Id);
+            }
+            for (var i in ids) {
+                deletedRows.push($dg.treegrid("pop", ids[i]));
+
+            }
+        },//
+        restore: function ($dg) {
+            $dg.treegrid("reload");
+        },//
+        save: function ($dg) {
+            for (var i in $dg.treegrid('getSelections')) {
+                var obj = $dg.treegrid('getSelections')[i];
+                $dg.treegrid('endEdit', obj.Id);
+            }
+
+            var rows = $dg.treegrid('getChanges');
+            var ids = new Array();
+            for (var i in deletedRows) {
+                ids.push(deletedRows[i].Id);
+            }
+            var data = new Object();
+            var reg = new RegExp("^ID[0-9]*$");
+            for (var i in rows) {
+                if (reg.test(rows[i].Id)) {
+                    //添加
+                    rows[i].Id = 0;
+                    insertedRows.push(rows[i]);
+                }
+                else {
+                    //取修改的数据
+                    console.log("inArray", $.inArray(rows[i].Id, ids), ids);
+                    if (ids.length == 0 || $.inArray(rows[i].Id, ids) == -1) {
+                        updatedRows.push(rows[i]);
+                    }
+                }
+            }
+
+            if (insertedRows.length) {
+                data["insertedRows"] = JSON.stringify(insertedRows);
+            }
+
+            if (updatedRows.length) {
+                data["updatedRows"] = JSON.stringify(updatedRows);
+            }
+
+            if (deletedRows.length) {
+                data["deletedRows"] = JSON.stringify(deletedRows);
+            }
+
+            $dg.treegrid('acceptChanges');//此句是提交表单，如果不提交，getChanges方法会返回所有未提交的数据
+            $dg.treegrid("unselectAll");
+
+            console.log(data);
+
+            if (rows.length > 0) {
+                //更新数据库
+                $.ajax({
+                    url: "BacthSave",
+                    type: "post",
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+                        console.log(data);
+                        if (data.success) { }
+                        $.messager.alert('提示', data.Message, 'info');
+
+                        if (data.success) {
+                            $dg.treegrid("reload");
+                            insertedRows = [];
+                            updatedRows = [];
+                            deletedRows = [];
+
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorMsg) {
+                        // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                        // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                        // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                        alert("请求失败：" + errorMsg);
+                        insertedRows = [];
+                        updatedRows = [];
+                        deletedRows = [];
+                    }
+                });
+            }
+        },//
+        search: function ($dg) { },//Remark
+        refresh: function ($dg) { },//
+        help: function ($dg) {
+            $('#dlgHelper').dialog({
+                title: '帮助',
+                iconCls: 'icon-help',
+                width: 800,
+                height: 500,
+                closed: false,
+                cache: false,
+                href: '/Sys_Helper/index#role',
+                modal: true
+            });
+        },//
+    };
+
+    $("#toolbar").find("#btn_Add").on("click", function () { toolbar.add(tgDeparments); });
+    $("#toolbar").find("#btn_Edit").on("click", function () { toolbar.edit(tgDeparments); });
+    $("#toolbar").find("#btn_Delete").on("click", function () { toolbar.delete(tgDeparments); });
+    $("#toolbar").find("#btn_Restore").on("click", function () { toolbar.restore(tgDeparments); });
+    $("#toolbar").find("#btn_Save").on("click", function () { toolbar.save(tgDeparments); });
+    $("#toolbar").find("#btn_Search").on("click", function () { toolbar.search(tgDeparments); });
+    $("#toolbar").find("#btn_Refresh").on("click", function () { toolbar.refresh(tgDeparments); });
+    $("#toolbar").find("#btn_Help").on("click", function () { toolbar.help(tgDeparments); });
+
+</script>

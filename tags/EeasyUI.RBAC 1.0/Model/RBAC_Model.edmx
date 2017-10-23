@@ -1,0 +1,1538 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RBACModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="RBACModelStoreContainer">
+    <EntitySet Name="Sys_Buttons" EntityType="RBACModel.Store.Sys_Buttons" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sys_Departments" EntityType="RBACModel.Store.Sys_Departments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sys_Groups" EntityType="RBACModel.Store.Sys_Groups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sys_LogDetails" EntityType="RBACModel.Store.Sys_LogDetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sys_Logs" EntityType="RBACModel.Store.Sys_Logs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sys_LogSettings" EntityType="RBACModel.Store.Sys_LogSettings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sys_Navigations" EntityType="RBACModel.Store.Sys_Navigations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sys_Roles" EntityType="RBACModel.Store.Sys_Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sys_Users" EntityType="RBACModel.Store.Sys_Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="RBACModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sys_Users_Groups" EntityType="RBACModel.Store.Sys_Users_Groups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sys_GroupNavBtns" EntityType="RBACModel.Store.Sys_GroupNavBtns" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sys_Users_Departments" EntityType="RBACModel.Store.Sys_Users_Departments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sys_UserNavBtns" EntityType="RBACModel.Store.Sys_UserNavBtns" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sys_Roles_Departments" EntityType="RBACModel.Store.Sys_Roles_Departments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sys_RoleNavBtns" EntityType="RBACModel.Store.Sys_RoleNavBtns" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sys_NavButtons" EntityType="RBACModel.Store.Sys_NavButtons" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sys_Users_Roles" EntityType="RBACModel.Store.Sys_Users_Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sys_Parameter" EntityType="RBACModel.Store.Sys_Parameter" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Sys_LogDetails_Sys_Logs" Association="RBACModel.Store.FK_Sys_LogDetails_Sys_Logs">
+      <End Role="Sys_Logs" EntitySet="Sys_Logs" />
+      <End Role="Sys_LogDetails" EntitySet="Sys_LogDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_Logs_Sys_LogSettings" Association="RBACModel.Store.FK_Sys_Logs_Sys_LogSettings">
+      <End Role="Sys_LogSettings" EntitySet="Sys_LogSettings" />
+      <End Role="Sys_Logs" EntitySet="Sys_Logs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_Logs_Sys_Users" Association="RBACModel.Store.FK_Sys_Logs_Sys_Users">
+      <End Role="Sys_Users" EntitySet="Sys_Users" />
+      <End Role="Sys_Logs" EntitySet="Sys_Logs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_Users_Groups_Sys_Groups" Association="RBACModel.Store.FK_Sys_Users_Groups_Sys_Groups">
+      <End Role="Sys_Groups" EntitySet="Sys_Groups" />
+      <End Role="Sys_Users_Groups" EntitySet="Sys_Users_Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_Users_Groups_Sys_Users" Association="RBACModel.Store.FK_Sys_Users_Groups_Sys_Users">
+      <End Role="Sys_Users" EntitySet="Sys_Users" />
+      <End Role="Sys_Users_Groups" EntitySet="Sys_Users_Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_GroupNavBtns_Sys_Buttons" Association="RBACModel.Store.FK_Sys_GroupNavBtns_Sys_Buttons">
+      <End Role="Sys_Buttons" EntitySet="Sys_Buttons" />
+      <End Role="Sys_GroupNavBtns" EntitySet="Sys_GroupNavBtns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_GroupNavBtns_Sys_Groups" Association="RBACModel.Store.FK_Sys_GroupNavBtns_Sys_Groups">
+      <End Role="Sys_Groups" EntitySet="Sys_Groups" />
+      <End Role="Sys_GroupNavBtns" EntitySet="Sys_GroupNavBtns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_GroupNavBtns_Sys_Navigations" Association="RBACModel.Store.FK_Sys_GroupNavBtns_Sys_Navigations">
+      <End Role="Sys_Navigations" EntitySet="Sys_Navigations" />
+      <End Role="Sys_GroupNavBtns" EntitySet="Sys_GroupNavBtns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_Users_Departments_Sys_Departments" Association="RBACModel.Store.FK_Sys_Users_Departments_Sys_Departments">
+      <End Role="Sys_Departments" EntitySet="Sys_Departments" />
+      <End Role="Sys_Users_Departments" EntitySet="Sys_Users_Departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_Users_Departments_Sys_Users" Association="RBACModel.Store.FK_Sys_Users_Departments_Sys_Users">
+      <End Role="Sys_Users" EntitySet="Sys_Users" />
+      <End Role="Sys_Users_Departments" EntitySet="Sys_Users_Departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_UserNavBtns_Sys_Buttons" Association="RBACModel.Store.FK_Sys_UserNavBtns_Sys_Buttons">
+      <End Role="Sys_Buttons" EntitySet="Sys_Buttons" />
+      <End Role="Sys_UserNavBtns" EntitySet="Sys_UserNavBtns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_UserNavBtns_Sys_Navigations" Association="RBACModel.Store.FK_Sys_UserNavBtns_Sys_Navigations">
+      <End Role="Sys_Navigations" EntitySet="Sys_Navigations" />
+      <End Role="Sys_UserNavBtns" EntitySet="Sys_UserNavBtns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_UserNavBtns_Sys_Users" Association="RBACModel.Store.FK_Sys_UserNavBtns_Sys_Users">
+      <End Role="Sys_Users" EntitySet="Sys_Users" />
+      <End Role="Sys_UserNavBtns" EntitySet="Sys_UserNavBtns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_Roles_Departments_Sys_Departments" Association="RBACModel.Store.FK_Sys_Roles_Departments_Sys_Departments">
+      <End Role="Sys_Departments" EntitySet="Sys_Departments" />
+      <End Role="Sys_Roles_Departments" EntitySet="Sys_Roles_Departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_Roles_Departments_Sys_Roles" Association="RBACModel.Store.FK_Sys_Roles_Departments_Sys_Roles">
+      <End Role="Sys_Roles" EntitySet="Sys_Roles" />
+      <End Role="Sys_Roles_Departments" EntitySet="Sys_Roles_Departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_RoleNavBtns_Sys_Buttons" Association="RBACModel.Store.FK_Sys_RoleNavBtns_Sys_Buttons">
+      <End Role="Sys_Buttons" EntitySet="Sys_Buttons" />
+      <End Role="Sys_RoleNavBtns" EntitySet="Sys_RoleNavBtns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_RoleNavBtns_Sys_Navigations" Association="RBACModel.Store.FK_Sys_RoleNavBtns_Sys_Navigations">
+      <End Role="Sys_Navigations" EntitySet="Sys_Navigations" />
+      <End Role="Sys_RoleNavBtns" EntitySet="Sys_RoleNavBtns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_RoleNavBtns_Sys_Roles" Association="RBACModel.Store.FK_Sys_RoleNavBtns_Sys_Roles">
+      <End Role="Sys_Roles" EntitySet="Sys_Roles" />
+      <End Role="Sys_RoleNavBtns" EntitySet="Sys_RoleNavBtns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_NavButtons_Sys_Buttons" Association="RBACModel.Store.FK_Sys_NavButtons_Sys_Buttons">
+      <End Role="Sys_Buttons" EntitySet="Sys_Buttons" />
+      <End Role="Sys_NavButtons" EntitySet="Sys_NavButtons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_NavButtons_Sys_Navigations" Association="RBACModel.Store.FK_Sys_NavButtons_Sys_Navigations">
+      <End Role="Sys_Navigations" EntitySet="Sys_Navigations" />
+      <End Role="Sys_NavButtons" EntitySet="Sys_NavButtons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_Users_Roles_Sys_Roles" Association="RBACModel.Store.FK_Sys_Users_Roles_Sys_Roles">
+      <End Role="Sys_Roles" EntitySet="Sys_Roles" />
+      <End Role="Sys_Users_Roles" EntitySet="Sys_Users_Roles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sys_Users_Roles_Sys_Users" Association="RBACModel.Store.FK_Sys_Users_Roles_Sys_Users">
+      <End Role="Sys_Users" EntitySet="Sys_Users" />
+      <End Role="Sys_Users_Roles" EntitySet="Sys_Users_Roles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Sys_Buttons">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ButtonText" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="SortNum" Type="int" Nullable="false" />
+    <Property Name="IconCls" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="IconUrl" Type="nvarchar" Nullable="true" MaxLength="500" />
+    <Property Name="ButtonTag" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="ButtonHtml" Type="varchar" Nullable="true" MaxLength="500" />
+    <Property Name="Remark" Type="varchar" Nullable="true" MaxLength="200" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sys_Departments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepartmentName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="ParentId" Type="int" Nullable="false" />
+    <Property Name="SortNum" Type="int" Nullable="false" />
+    <Property Name="Remark" Type="varchar" Nullable="true" MaxLength="500" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sys_Groups">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="Remark" Type="varchar" Nullable="true" MaxLength="500" />
+    <Property Name="ParentId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sys_LogDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LogId" Type="int" Nullable="false" />
+    <Property Name="ColumnName" Type="varchar" Nullable="true" MaxLength="30" />
+    <Property Name="ColumnText" Type="varchar" Nullable="true" MaxLength="30" />
+    <Property Name="ColumnDataType" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="OldValue" Type="varchar(max)" Nullable="true" />
+    <Property Name="NewValue" Type="varchar(max)" Nullable="true" />
+    <Property Name="Remark" Type="varchar" Nullable="true" MaxLength="1000" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sys_Logs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LogSettingId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="PrimaryKeyValue" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="OperationIP" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="SqlText" Type="varchar" Nullable="true" MaxLength="500" />
+    <Property Name="Url" Type="varchar" Nullable="false" MaxLength="300" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="Remark" Type="varchar" Nullable="true" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Sys_LogSettings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TableName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="BusinessName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="PrimaryKey" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="Remark" Type="varchar" Nullable="true" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Sys_Navigations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NavTitle" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="LinkUrl" Type="varchar" Nullable="false" MaxLength="1000" />
+    <Property Name="IconCls" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="IconUrl" Type="varchar" Nullable="true" MaxLength="500" />
+    <Property Name="IsVisible" Type="bit" Nullable="true" />
+    <Property Name="ParentId" Type="int" Nullable="false" />
+    <Property Name="NavTag" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="BigImageUrl" Type="varchar" Nullable="true" MaxLength="200" />
+    <Property Name="SortNum" Type="int" Nullable="false" />
+    <Property Name="Remark" Type="varchar" Nullable="true" MaxLength="200" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sys_Roles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="IsDefault" Type="bit" Nullable="true" />
+    <Property Name="SortNum" Type="int" Nullable="false" />
+    <Property Name="Remark" Type="varchar" Nullable="true" MaxLength="200" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="ParentId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Sys_Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="PassSalt" Type="varchar" Nullable="false" MaxLength="6" />
+    <Property Name="Email" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="IsDisabled" Type="bit" Nullable="true" />
+    <Property Name="TrueName" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Mobile" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="QQ" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="MenusJson" Type="varchar(max)" Nullable="true" />
+    <Property Name="ConfigJson" Type="varchar(max)" Nullable="true" />
+    <Property Name="Remark" Type="varchar" Nullable="true" MaxLength="1000" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" Nullable="true" />
+    <Property Name="definition" Type="varbinary(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Sys_Users_Groups">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sys_GroupNavBtns">
+    <Key>
+      <PropertyRef Name="GroupId" />
+      <PropertyRef Name="NavId" />
+      <PropertyRef Name="BtnId" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+    <Property Name="NavId" Type="int" Nullable="false" />
+    <Property Name="BtnId" Type="int" Nullable="false" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sys_Users_Departments">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="DepId" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="DepId" Type="int" Nullable="false" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sys_UserNavBtns">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="NavId" />
+      <PropertyRef Name="BtnId" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="NavId" Type="int" Nullable="false" />
+    <Property Name="BtnId" Type="int" Nullable="false" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sys_Roles_Departments">
+    <Key>
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="DepId" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="DepId" Type="int" Nullable="false" />
+    <Property Name="Remark" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sys_RoleNavBtns">
+    <Key>
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="NavId" />
+      <PropertyRef Name="BtnId" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="NavId" Type="int" Nullable="false" />
+    <Property Name="BtnId" Type="int" Nullable="false" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sys_NavButtons">
+    <Key>
+      <PropertyRef Name="NavId" />
+      <PropertyRef Name="BtnId" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NavId" Type="int" Nullable="false" />
+    <Property Name="BtnId" Type="int" Nullable="false" />
+    <Property Name="SortNum" Type="int" Nullable="false" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sys_Users_Roles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sys_Parameter">
+    <Key>
+      <PropertyRef Name="ParamCode" />
+    </Key>
+    <Property Name="ParamCode" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="ParamValue" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="IsUserEditable" Type="bit" Nullable="true" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="1000" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Sys_LogDetails_Sys_Logs">
+    <End Role="Sys_Logs" Type="RBACModel.Store.Sys_Logs" Multiplicity="1" />
+    <End Role="Sys_LogDetails" Type="RBACModel.Store.Sys_LogDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Logs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_LogDetails">
+        <PropertyRef Name="LogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_Logs_Sys_LogSettings">
+    <End Role="Sys_LogSettings" Type="RBACModel.Store.Sys_LogSettings" Multiplicity="1" />
+    <End Role="Sys_Logs" Type="RBACModel.Store.Sys_Logs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_LogSettings">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_Logs">
+        <PropertyRef Name="LogSettingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_Logs_Sys_Users">
+    <End Role="Sys_Users" Type="RBACModel.Store.Sys_Users" Multiplicity="1" />
+    <End Role="Sys_Logs" Type="RBACModel.Store.Sys_Logs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_Logs">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_Users_Groups_Sys_Groups">
+    <End Role="Sys_Groups" Type="RBACModel.Store.Sys_Groups" Multiplicity="1" />
+    <End Role="Sys_Users_Groups" Type="RBACModel.Store.Sys_Users_Groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Groups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_Users_Groups">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_Users_Groups_Sys_Users">
+    <End Role="Sys_Users" Type="RBACModel.Store.Sys_Users" Multiplicity="1" />
+    <End Role="Sys_Users_Groups" Type="RBACModel.Store.Sys_Users_Groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_Users_Groups">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_GroupNavBtns_Sys_Buttons">
+    <End Role="Sys_Buttons" Type="RBACModel.Store.Sys_Buttons" Multiplicity="1" />
+    <End Role="Sys_GroupNavBtns" Type="RBACModel.Store.Sys_GroupNavBtns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Buttons">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_GroupNavBtns">
+        <PropertyRef Name="BtnId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_GroupNavBtns_Sys_Groups">
+    <End Role="Sys_Groups" Type="RBACModel.Store.Sys_Groups" Multiplicity="1" />
+    <End Role="Sys_GroupNavBtns" Type="RBACModel.Store.Sys_GroupNavBtns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Groups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_GroupNavBtns">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_GroupNavBtns_Sys_Navigations">
+    <End Role="Sys_Navigations" Type="RBACModel.Store.Sys_Navigations" Multiplicity="1" />
+    <End Role="Sys_GroupNavBtns" Type="RBACModel.Store.Sys_GroupNavBtns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Navigations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_GroupNavBtns">
+        <PropertyRef Name="NavId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_Users_Departments_Sys_Departments">
+    <End Role="Sys_Departments" Type="RBACModel.Store.Sys_Departments" Multiplicity="1" />
+    <End Role="Sys_Users_Departments" Type="RBACModel.Store.Sys_Users_Departments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Departments">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_Users_Departments">
+        <PropertyRef Name="DepId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_Users_Departments_Sys_Users">
+    <End Role="Sys_Users" Type="RBACModel.Store.Sys_Users" Multiplicity="1" />
+    <End Role="Sys_Users_Departments" Type="RBACModel.Store.Sys_Users_Departments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_Users_Departments">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_UserNavBtns_Sys_Buttons">
+    <End Role="Sys_Buttons" Type="RBACModel.Store.Sys_Buttons" Multiplicity="1" />
+    <End Role="Sys_UserNavBtns" Type="RBACModel.Store.Sys_UserNavBtns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Buttons">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_UserNavBtns">
+        <PropertyRef Name="BtnId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_UserNavBtns_Sys_Navigations">
+    <End Role="Sys_Navigations" Type="RBACModel.Store.Sys_Navigations" Multiplicity="1" />
+    <End Role="Sys_UserNavBtns" Type="RBACModel.Store.Sys_UserNavBtns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Navigations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_UserNavBtns">
+        <PropertyRef Name="NavId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_UserNavBtns_Sys_Users">
+    <End Role="Sys_Users" Type="RBACModel.Store.Sys_Users" Multiplicity="1" />
+    <End Role="Sys_UserNavBtns" Type="RBACModel.Store.Sys_UserNavBtns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_UserNavBtns">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_Roles_Departments_Sys_Departments">
+    <End Role="Sys_Departments" Type="RBACModel.Store.Sys_Departments" Multiplicity="1" />
+    <End Role="Sys_Roles_Departments" Type="RBACModel.Store.Sys_Roles_Departments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Departments">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_Roles_Departments">
+        <PropertyRef Name="DepId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_Roles_Departments_Sys_Roles">
+    <End Role="Sys_Roles" Type="RBACModel.Store.Sys_Roles" Multiplicity="1" />
+    <End Role="Sys_Roles_Departments" Type="RBACModel.Store.Sys_Roles_Departments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_Roles_Departments">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_RoleNavBtns_Sys_Buttons">
+    <End Role="Sys_Buttons" Type="RBACModel.Store.Sys_Buttons" Multiplicity="1" />
+    <End Role="Sys_RoleNavBtns" Type="RBACModel.Store.Sys_RoleNavBtns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Buttons">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_RoleNavBtns">
+        <PropertyRef Name="BtnId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_RoleNavBtns_Sys_Navigations">
+    <End Role="Sys_Navigations" Type="RBACModel.Store.Sys_Navigations" Multiplicity="1" />
+    <End Role="Sys_RoleNavBtns" Type="RBACModel.Store.Sys_RoleNavBtns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Navigations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_RoleNavBtns">
+        <PropertyRef Name="NavId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_RoleNavBtns_Sys_Roles">
+    <End Role="Sys_Roles" Type="RBACModel.Store.Sys_Roles" Multiplicity="1" />
+    <End Role="Sys_RoleNavBtns" Type="RBACModel.Store.Sys_RoleNavBtns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_RoleNavBtns">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_NavButtons_Sys_Buttons">
+    <End Role="Sys_Buttons" Type="RBACModel.Store.Sys_Buttons" Multiplicity="1" />
+    <End Role="Sys_NavButtons" Type="RBACModel.Store.Sys_NavButtons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Buttons">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_NavButtons">
+        <PropertyRef Name="BtnId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_NavButtons_Sys_Navigations">
+    <End Role="Sys_Navigations" Type="RBACModel.Store.Sys_Navigations" Multiplicity="1" />
+    <End Role="Sys_NavButtons" Type="RBACModel.Store.Sys_NavButtons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Navigations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_NavButtons">
+        <PropertyRef Name="NavId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_Users_Roles_Sys_Roles">
+    <End Role="Sys_Roles" Type="RBACModel.Store.Sys_Roles" Multiplicity="1" />
+    <End Role="Sys_Users_Roles" Type="RBACModel.Store.Sys_Users_Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_Users_Roles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sys_Users_Roles_Sys_Users">
+    <End Role="Sys_Users" Type="RBACModel.Store.Sys_Users" Multiplicity="1" />
+    <End Role="Sys_Users_Roles" Type="RBACModel.Store.Sys_Users_Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sys_Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sys_Users_Roles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RBACModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Sys_Buttons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ButtonText" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SortNum" Type="Int32" Nullable="false" />
+          <Property Name="IconCls" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IconUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ButtonTag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ButtonHtml" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" Nullable="false" />
+          <NavigationProperty Name="Sys_GroupNavBtns" Relationship="RBACModel.FK_Sys_GroupNavBtns_Sys_Buttons" FromRole="Sys_Buttons" ToRole="Sys_GroupNavBtns" />
+          <NavigationProperty Name="Sys_UserNavBtns" Relationship="RBACModel.FK_Sys_UserNavBtns_Sys_Buttons" FromRole="Sys_Buttons" ToRole="Sys_UserNavBtns" />
+          <NavigationProperty Name="Sys_RoleNavBtns" Relationship="RBACModel.FK_Sys_RoleNavBtns_Sys_Buttons" FromRole="Sys_Buttons" ToRole="Sys_RoleNavBtns" />
+          <NavigationProperty Name="Sys_NavButtons" Relationship="RBACModel.FK_Sys_NavButtons_Sys_Buttons" FromRole="Sys_Buttons" ToRole="Sys_NavButtons" />
+
+        </EntityType>
+        <EntityType Name="Sys_Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentName" Type="String" FixedLength="false" Unicode="false" Nullable="false" MaxLength="50" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <Property Name="SortNum" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Sys_Users_Departments" Relationship="RBACModel.FK_Sys_Users_Departments_Sys_Departments" FromRole="Sys_Departments" ToRole="Sys_Users_Departments" />
+          <NavigationProperty Name="Sys_Roles_Departments" Relationship="RBACModel.FK_Sys_Roles_Departments_Sys_Departments" FromRole="Sys_Departments" ToRole="Sys_Roles_Departments" />
+
+        </EntityType>
+        <EntityType Name="Sys_Groups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Nullable="false" Unicode="false" />
+          <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Remark" Type="String" Unicode="false" MaxLength="500" FixedLength="false" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sys_Users_Groups" Relationship="RBACModel.FK_Sys_Users_Groups_Sys_Groups" FromRole="Sys_Groups" ToRole="Sys_Users_Groups" />
+          <NavigationProperty Name="Sys_GroupNavBtns" Relationship="RBACModel.FK_Sys_GroupNavBtns_Sys_Groups" FromRole="Sys_Groups" ToRole="Sys_GroupNavBtns" />
+        </EntityType>
+        <EntityType Name="Sys_LogDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogId" Type="Int32" Nullable="false" />
+          <Property Name="ColumnName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ColumnText" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ColumnDataType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OldValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NewValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Sys_Logs" Relationship="RBACModel.FK_Sys_LogDetails_Sys_Logs" FromRole="Sys_LogDetails" ToRole="Sys_Logs" />
+         
+        </EntityType>
+        <EntityType Name="Sys_Logs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogSettingId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="PrimaryKeyValue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OperationIP" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SqlText" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Sys_LogDetails" Relationship="RBACModel.FK_Sys_LogDetails_Sys_Logs" FromRole="Sys_Logs" ToRole="Sys_LogDetails" />
+          <NavigationProperty Name="Sys_LogSettings" Relationship="RBACModel.FK_Sys_Logs_Sys_LogSettings" FromRole="Sys_Logs" ToRole="Sys_LogSettings" />
+          <NavigationProperty Name="Sys_Users" Relationship="RBACModel.FK_Sys_Logs_Sys_Users" FromRole="Sys_Logs" ToRole="Sys_Users" />
+          
+        </EntityType>
+        <EntityType Name="Sys_LogSettings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TableName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BusinessName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrimaryKey" Type="String" FixedLength="false" Unicode="false" Nullable="false" MaxLength="50" />
+          <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Sys_Logs" Relationship="RBACModel.FK_Sys_Logs_Sys_LogSettings" FromRole="Sys_LogSettings" ToRole="Sys_Logs" />
+          
+        </EntityType>
+        <EntityType Name="Sys_Navigations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NavTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LinkUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IconCls" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IconUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IsVisible" Type="Boolean" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <Property Name="NavTag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BigImageUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SortNum" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" Unicode="false" MaxLength="200" FixedLength="false" />
+          <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Sys_GroupNavBtns" Relationship="RBACModel.FK_Sys_GroupNavBtns_Sys_Navigations" FromRole="Sys_Navigations" ToRole="Sys_GroupNavBtns" />
+          <NavigationProperty Name="Sys_UserNavBtns" Relationship="RBACModel.FK_Sys_UserNavBtns_Sys_Navigations" FromRole="Sys_Navigations" ToRole="Sys_UserNavBtns" />
+          <NavigationProperty Name="Sys_RoleNavBtns" Relationship="RBACModel.FK_Sys_RoleNavBtns_Sys_Navigations" FromRole="Sys_Navigations" ToRole="Sys_RoleNavBtns" />
+          <NavigationProperty Name="Sys_NavButtons" Relationship="RBACModel.FK_Sys_NavButtons_Sys_Navigations" FromRole="Sys_Navigations" ToRole="Sys_NavButtons" />
+
+        </EntityType>
+        <EntityType Name="Sys_Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsDefault" Type="Boolean" />
+          <Property Name="SortNum" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ParentId" Type="Int32" />
+          <NavigationProperty Name="Sys_Roles_Departments" Relationship="RBACModel.FK_Sys_Roles_Departments_Sys_Roles" FromRole="Sys_Roles" ToRole="Sys_Roles_Departments" />
+          <NavigationProperty Name="Sys_RoleNavBtns" Relationship="RBACModel.FK_Sys_RoleNavBtns_Sys_Roles" FromRole="Sys_Roles" ToRole="Sys_RoleNavBtns" />
+          <NavigationProperty Name="Sys_Users_Roles" Relationship="RBACModel.FK_Sys_Users_Roles_Sys_Roles" FromRole="Sys_Roles" ToRole="Sys_Users_Roles" />
+
+        </EntityType>
+        <EntityType Name="Sys_Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" FixedLength="false" Nullable="false" Unicode="true" MaxLength="50" />
+          <Property Name="PassSalt" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDisabled" Type="Boolean" />
+          <Property Name="TrueName" Type="String" FixedLength="false" Unicode="false" MaxLength="50" />
+          <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="QQ" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MenusJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ConfigJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Sys_Logs" Relationship="RBACModel.FK_Sys_Logs_Sys_Users" FromRole="Sys_Users" ToRole="Sys_Logs" />
+          <NavigationProperty Name="Sys_Users_Groups" Relationship="RBACModel.FK_Sys_Users_Groups_Sys_Users" FromRole="Sys_Users" ToRole="Sys_Users_Groups" />
+          <NavigationProperty Name="Sys_Users_Departments" Relationship="RBACModel.FK_Sys_Users_Departments_Sys_Users" FromRole="Sys_Users" ToRole="Sys_Users_Departments" />
+          <NavigationProperty Name="Sys_UserNavBtns" Relationship="RBACModel.FK_Sys_UserNavBtns_Sys_Users" FromRole="Sys_Users" ToRole="Sys_UserNavBtns" />
+          <NavigationProperty Name="Sys_Users_Roles" Relationship="RBACModel.FK_Sys_Users_Roles_Sys_Users" FromRole="Sys_Users" ToRole="Sys_Users_Roles" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        
+        <EntityContainer Name="RBACEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Sys_Buttons" EntityType="Self.Sys_Buttons" />
+          <EntitySet Name="Sys_Departments" EntityType="Self.Sys_Departments" />
+          <EntitySet Name="Sys_Groups" EntityType="Self.Sys_Groups" />
+          <EntitySet Name="Sys_LogDetails" EntityType="Self.Sys_LogDetails" />
+          <EntitySet Name="Sys_Logs" EntityType="Self.Sys_Logs" />
+          <EntitySet Name="Sys_LogSettings" EntityType="Self.Sys_LogSettings" />
+          <EntitySet Name="Sys_Navigations" EntityType="Self.Sys_Navigations" />
+          <EntitySet Name="Sys_Roles" EntityType="Self.Sys_Roles" />
+          <EntitySet Name="Sys_Users" EntityType="Self.Sys_Users" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Sys_LogDetails_Sys_Logs" Association="RBACModel.FK_Sys_LogDetails_Sys_Logs">
+            <End Role="Sys_Logs" EntitySet="Sys_Logs" />
+            <End Role="Sys_LogDetails" EntitySet="Sys_LogDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_Logs_Sys_LogSettings" Association="RBACModel.FK_Sys_Logs_Sys_LogSettings">
+            <End Role="Sys_LogSettings" EntitySet="Sys_LogSettings" />
+            <End Role="Sys_Logs" EntitySet="Sys_Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_Logs_Sys_Users" Association="RBACModel.FK_Sys_Logs_Sys_Users">
+            <End Role="Sys_Users" EntitySet="Sys_Users" />
+            <End Role="Sys_Logs" EntitySet="Sys_Logs" />
+          </AssociationSet>
+          <EntitySet Name="Sys_Users_Groups" EntityType="RBACModel.Sys_Users_Groups" />
+          <AssociationSet Name="FK_Sys_Users_Groups_Sys_Groups" Association="RBACModel.FK_Sys_Users_Groups_Sys_Groups">
+            <End Role="Sys_Groups" EntitySet="Sys_Groups" />
+            <End Role="Sys_Users_Groups" EntitySet="Sys_Users_Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_Users_Groups_Sys_Users" Association="RBACModel.FK_Sys_Users_Groups_Sys_Users">
+            <End Role="Sys_Users" EntitySet="Sys_Users" />
+            <End Role="Sys_Users_Groups" EntitySet="Sys_Users_Groups" />
+          </AssociationSet>
+          <EntitySet Name="Sys_GroupNavBtns" EntityType="RBACModel.Sys_GroupNavBtns" />
+          <AssociationSet Name="FK_Sys_GroupNavBtns_Sys_Buttons" Association="RBACModel.FK_Sys_GroupNavBtns_Sys_Buttons">
+            <End Role="Sys_Buttons" EntitySet="Sys_Buttons" />
+            <End Role="Sys_GroupNavBtns" EntitySet="Sys_GroupNavBtns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_GroupNavBtns_Sys_Groups" Association="RBACModel.FK_Sys_GroupNavBtns_Sys_Groups">
+            <End Role="Sys_Groups" EntitySet="Sys_Groups" />
+            <End Role="Sys_GroupNavBtns" EntitySet="Sys_GroupNavBtns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_GroupNavBtns_Sys_Navigations" Association="RBACModel.FK_Sys_GroupNavBtns_Sys_Navigations">
+            <End Role="Sys_Navigations" EntitySet="Sys_Navigations" />
+            <End Role="Sys_GroupNavBtns" EntitySet="Sys_GroupNavBtns" />
+          </AssociationSet>
+          <EntitySet Name="Sys_Users_Departments" EntityType="RBACModel.Sys_Users_Departments" />
+          <AssociationSet Name="FK_Sys_Users_Departments_Sys_Departments" Association="RBACModel.FK_Sys_Users_Departments_Sys_Departments">
+            <End Role="Sys_Departments" EntitySet="Sys_Departments" />
+            <End Role="Sys_Users_Departments" EntitySet="Sys_Users_Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_Users_Departments_Sys_Users" Association="RBACModel.FK_Sys_Users_Departments_Sys_Users">
+            <End Role="Sys_Users" EntitySet="Sys_Users" />
+            <End Role="Sys_Users_Departments" EntitySet="Sys_Users_Departments" />
+          </AssociationSet>
+          <EntitySet Name="Sys_UserNavBtns" EntityType="RBACModel.Sys_UserNavBtns" />
+          <AssociationSet Name="FK_Sys_UserNavBtns_Sys_Buttons" Association="RBACModel.FK_Sys_UserNavBtns_Sys_Buttons">
+            <End Role="Sys_Buttons" EntitySet="Sys_Buttons" />
+            <End Role="Sys_UserNavBtns" EntitySet="Sys_UserNavBtns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_UserNavBtns_Sys_Navigations" Association="RBACModel.FK_Sys_UserNavBtns_Sys_Navigations">
+            <End Role="Sys_Navigations" EntitySet="Sys_Navigations" />
+            <End Role="Sys_UserNavBtns" EntitySet="Sys_UserNavBtns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_UserNavBtns_Sys_Users" Association="RBACModel.FK_Sys_UserNavBtns_Sys_Users">
+            <End Role="Sys_Users" EntitySet="Sys_Users" />
+            <End Role="Sys_UserNavBtns" EntitySet="Sys_UserNavBtns" />
+          </AssociationSet>
+          <EntitySet Name="Sys_Roles_Departments" EntityType="RBACModel.Sys_Roles_Departments" />
+          <AssociationSet Name="FK_Sys_Roles_Departments_Sys_Departments" Association="RBACModel.FK_Sys_Roles_Departments_Sys_Departments">
+            <End Role="Sys_Departments" EntitySet="Sys_Departments" />
+            <End Role="Sys_Roles_Departments" EntitySet="Sys_Roles_Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_Roles_Departments_Sys_Roles" Association="RBACModel.FK_Sys_Roles_Departments_Sys_Roles">
+            <End Role="Sys_Roles" EntitySet="Sys_Roles" />
+            <End Role="Sys_Roles_Departments" EntitySet="Sys_Roles_Departments" />
+          </AssociationSet>
+          <EntitySet Name="Sys_RoleNavBtns" EntityType="RBACModel.Sys_RoleNavBtns" />
+          <AssociationSet Name="FK_Sys_RoleNavBtns_Sys_Buttons" Association="RBACModel.FK_Sys_RoleNavBtns_Sys_Buttons">
+            <End Role="Sys_Buttons" EntitySet="Sys_Buttons" />
+            <End Role="Sys_RoleNavBtns" EntitySet="Sys_RoleNavBtns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_RoleNavBtns_Sys_Navigations" Association="RBACModel.FK_Sys_RoleNavBtns_Sys_Navigations">
+            <End Role="Sys_Navigations" EntitySet="Sys_Navigations" />
+            <End Role="Sys_RoleNavBtns" EntitySet="Sys_RoleNavBtns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_RoleNavBtns_Sys_Roles" Association="RBACModel.FK_Sys_RoleNavBtns_Sys_Roles">
+            <End Role="Sys_Roles" EntitySet="Sys_Roles" />
+            <End Role="Sys_RoleNavBtns" EntitySet="Sys_RoleNavBtns" />
+          </AssociationSet>
+          <EntitySet Name="Sys_NavButtons" EntityType="RBACModel.Sys_NavButtons" />
+          <AssociationSet Name="FK_Sys_NavButtons_Sys_Buttons" Association="RBACModel.FK_Sys_NavButtons_Sys_Buttons">
+            <End Role="Sys_Buttons" EntitySet="Sys_Buttons" />
+            <End Role="Sys_NavButtons" EntitySet="Sys_NavButtons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_NavButtons_Sys_Navigations" Association="RBACModel.FK_Sys_NavButtons_Sys_Navigations">
+            <End Role="Sys_Navigations" EntitySet="Sys_Navigations" />
+            <End Role="Sys_NavButtons" EntitySet="Sys_NavButtons" />
+          </AssociationSet>
+          <EntitySet Name="Sys_Users_Roles" EntityType="RBACModel.Sys_Users_Roles" />
+          <AssociationSet Name="FK_Sys_Users_Roles_Sys_Roles" Association="RBACModel.FK_Sys_Users_Roles_Sys_Roles">
+            <End Role="Sys_Roles" EntitySet="Sys_Roles" />
+            <End Role="Sys_Users_Roles" EntitySet="Sys_Users_Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_Users_Roles_Sys_Users" Association="RBACModel.FK_Sys_Users_Roles_Sys_Users">
+            <End Role="Sys_Users" EntitySet="Sys_Users" />
+            <End Role="Sys_Users_Roles" EntitySet="Sys_Users_Roles" />
+          </AssociationSet>
+          <EntitySet Name="Sys_Parameter" EntityType="RBACModel.Sys_Parameter" />
+          
+        </EntityContainer>
+        <Association Name="FK_Sys_LogDetails_Sys_Logs">
+          <End Type="RBACModel.Sys_Logs" Role="Sys_Logs" Multiplicity="1" />
+          <End Type="RBACModel.Sys_LogDetails" Role="Sys_LogDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Logs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_LogDetails">
+              <PropertyRef Name="LogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_Logs_Sys_LogSettings">
+          <End Type="RBACModel.Sys_LogSettings" Role="Sys_LogSettings" Multiplicity="1" />
+          <End Type="RBACModel.Sys_Logs" Role="Sys_Logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_LogSettings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_Logs">
+              <PropertyRef Name="LogSettingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_Logs_Sys_Users">
+          <End Type="RBACModel.Sys_Users" Role="Sys_Users" Multiplicity="1" />
+          <End Type="RBACModel.Sys_Logs" Role="Sys_Logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_Logs">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sys_Users_Groups">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Sys_Groups" Relationship="RBACModel.FK_Sys_Users_Groups_Sys_Groups" FromRole="Sys_Users_Groups" ToRole="Sys_Groups" />
+          <NavigationProperty Name="Sys_Users" Relationship="RBACModel.FK_Sys_Users_Groups_Sys_Users" FromRole="Sys_Users_Groups" ToRole="Sys_Users" />
+        </EntityType>
+        <Association Name="FK_Sys_Users_Groups_Sys_Groups">
+          <End Type="RBACModel.Sys_Groups" Role="Sys_Groups" Multiplicity="1" />
+          <End Type="RBACModel.Sys_Users_Groups" Role="Sys_Users_Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_Users_Groups">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_Users_Groups_Sys_Users">
+          <End Type="RBACModel.Sys_Users" Role="Sys_Users" Multiplicity="1" />
+          <End Type="RBACModel.Sys_Users_Groups" Role="Sys_Users_Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_Users_Groups">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sys_GroupNavBtns">
+          <Key>
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="NavId" />
+            <PropertyRef Name="BtnId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="NavId" Type="Int32" Nullable="false" />
+          <Property Name="BtnId" Type="Int32" Nullable="false" />
+          <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Sys_Buttons" Relationship="RBACModel.FK_Sys_GroupNavBtns_Sys_Buttons" FromRole="Sys_GroupNavBtns" ToRole="Sys_Buttons" />
+          <NavigationProperty Name="Sys_Groups" Relationship="RBACModel.FK_Sys_GroupNavBtns_Sys_Groups" FromRole="Sys_GroupNavBtns" ToRole="Sys_Groups" />
+          <NavigationProperty Name="Sys_Navigations" Relationship="RBACModel.FK_Sys_GroupNavBtns_Sys_Navigations" FromRole="Sys_GroupNavBtns" ToRole="Sys_Navigations" />
+        </EntityType>
+        <Association Name="FK_Sys_GroupNavBtns_Sys_Buttons">
+          <End Type="RBACModel.Sys_Buttons" Role="Sys_Buttons" Multiplicity="1" />
+          <End Type="RBACModel.Sys_GroupNavBtns" Role="Sys_GroupNavBtns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Buttons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_GroupNavBtns">
+              <PropertyRef Name="BtnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_GroupNavBtns_Sys_Groups">
+          <End Type="RBACModel.Sys_Groups" Role="Sys_Groups" Multiplicity="1" />
+          <End Type="RBACModel.Sys_GroupNavBtns" Role="Sys_GroupNavBtns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_GroupNavBtns">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_GroupNavBtns_Sys_Navigations">
+          <End Type="RBACModel.Sys_Navigations" Role="Sys_Navigations" Multiplicity="1" />
+          <End Type="RBACModel.Sys_GroupNavBtns" Role="Sys_GroupNavBtns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Navigations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_GroupNavBtns">
+              <PropertyRef Name="NavId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sys_Users_Departments">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="DepId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="DepId" Type="Int32" Nullable="false" />
+          <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Sys_Departments" Relationship="RBACModel.FK_Sys_Users_Departments_Sys_Departments" FromRole="Sys_Users_Departments" ToRole="Sys_Departments" />
+          <NavigationProperty Name="Sys_Users" Relationship="RBACModel.FK_Sys_Users_Departments_Sys_Users" FromRole="Sys_Users_Departments" ToRole="Sys_Users" />
+        </EntityType>
+        <Association Name="FK_Sys_Users_Departments_Sys_Departments">
+          <End Type="RBACModel.Sys_Departments" Role="Sys_Departments" Multiplicity="1" />
+          <End Type="RBACModel.Sys_Users_Departments" Role="Sys_Users_Departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_Users_Departments">
+              <PropertyRef Name="DepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_Users_Departments_Sys_Users">
+          <End Type="RBACModel.Sys_Users" Role="Sys_Users" Multiplicity="1" />
+          <End Type="RBACModel.Sys_Users_Departments" Role="Sys_Users_Departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_Users_Departments">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sys_UserNavBtns">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="NavId" />
+            <PropertyRef Name="BtnId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="NavId" Type="Int32" Nullable="false" />
+          <Property Name="BtnId" Type="Int32" Nullable="false" />
+          <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Sys_Buttons" Relationship="RBACModel.FK_Sys_UserNavBtns_Sys_Buttons" FromRole="Sys_UserNavBtns" ToRole="Sys_Buttons" />
+          <NavigationProperty Name="Sys_Navigations" Relationship="RBACModel.FK_Sys_UserNavBtns_Sys_Navigations" FromRole="Sys_UserNavBtns" ToRole="Sys_Navigations" />
+          <NavigationProperty Name="Sys_Users" Relationship="RBACModel.FK_Sys_UserNavBtns_Sys_Users" FromRole="Sys_UserNavBtns" ToRole="Sys_Users" />
+        </EntityType>
+        <Association Name="FK_Sys_UserNavBtns_Sys_Buttons">
+          <End Type="RBACModel.Sys_Buttons" Role="Sys_Buttons" Multiplicity="1" />
+          <End Type="RBACModel.Sys_UserNavBtns" Role="Sys_UserNavBtns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Buttons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_UserNavBtns">
+              <PropertyRef Name="BtnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_UserNavBtns_Sys_Navigations">
+          <End Type="RBACModel.Sys_Navigations" Role="Sys_Navigations" Multiplicity="1" />
+          <End Type="RBACModel.Sys_UserNavBtns" Role="Sys_UserNavBtns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Navigations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_UserNavBtns">
+              <PropertyRef Name="NavId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_UserNavBtns_Sys_Users">
+          <End Type="RBACModel.Sys_Users" Role="Sys_Users" Multiplicity="1" />
+          <End Type="RBACModel.Sys_UserNavBtns" Role="Sys_UserNavBtns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_UserNavBtns">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sys_Roles_Departments">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="DepId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="DepId" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Sys_Departments" Relationship="RBACModel.FK_Sys_Roles_Departments_Sys_Departments" FromRole="Sys_Roles_Departments" ToRole="Sys_Departments" />
+          <NavigationProperty Name="Sys_Roles" Relationship="RBACModel.FK_Sys_Roles_Departments_Sys_Roles" FromRole="Sys_Roles_Departments" ToRole="Sys_Roles" />
+        </EntityType>
+        <Association Name="FK_Sys_Roles_Departments_Sys_Departments">
+          <End Type="RBACModel.Sys_Departments" Role="Sys_Departments" Multiplicity="1" />
+          <End Type="RBACModel.Sys_Roles_Departments" Role="Sys_Roles_Departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_Roles_Departments">
+              <PropertyRef Name="DepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_Roles_Departments_Sys_Roles">
+          <End Type="RBACModel.Sys_Roles" Role="Sys_Roles" Multiplicity="1" />
+          <End Type="RBACModel.Sys_Roles_Departments" Role="Sys_Roles_Departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_Roles_Departments">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sys_RoleNavBtns">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="NavId" />
+            <PropertyRef Name="BtnId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="NavId" Type="Int32" Nullable="false" />
+          <Property Name="BtnId" Type="Int32" Nullable="false" />
+          <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Sys_Buttons" Relationship="RBACModel.FK_Sys_RoleNavBtns_Sys_Buttons" FromRole="Sys_RoleNavBtns" ToRole="Sys_Buttons" />
+          <NavigationProperty Name="Sys_Navigations" Relationship="RBACModel.FK_Sys_RoleNavBtns_Sys_Navigations" FromRole="Sys_RoleNavBtns" ToRole="Sys_Navigations" />
+          <NavigationProperty Name="Sys_Roles" Relationship="RBACModel.FK_Sys_RoleNavBtns_Sys_Roles" FromRole="Sys_RoleNavBtns" ToRole="Sys_Roles" />
+        </EntityType>
+        <Association Name="FK_Sys_RoleNavBtns_Sys_Buttons">
+          <End Type="RBACModel.Sys_Buttons" Role="Sys_Buttons" Multiplicity="1" />
+          <End Type="RBACModel.Sys_RoleNavBtns" Role="Sys_RoleNavBtns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Buttons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_RoleNavBtns">
+              <PropertyRef Name="BtnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_RoleNavBtns_Sys_Navigations">
+          <End Type="RBACModel.Sys_Navigations" Role="Sys_Navigations" Multiplicity="1" />
+          <End Type="RBACModel.Sys_RoleNavBtns" Role="Sys_RoleNavBtns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Navigations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_RoleNavBtns">
+              <PropertyRef Name="NavId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_RoleNavBtns_Sys_Roles">
+          <End Type="RBACModel.Sys_Roles" Role="Sys_Roles" Multiplicity="1" />
+          <End Type="RBACModel.Sys_RoleNavBtns" Role="Sys_RoleNavBtns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_RoleNavBtns">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sys_NavButtons">
+          <Key>
+            <PropertyRef Name="NavId" />
+            <PropertyRef Name="BtnId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NavId" Type="Int32" Nullable="false" />
+          <Property Name="BtnId" Type="Int32" Nullable="false" />
+          <Property Name="SortNum" Type="Int32" Nullable="false" />
+          <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Sys_Buttons" Relationship="RBACModel.FK_Sys_NavButtons_Sys_Buttons" FromRole="Sys_NavButtons" ToRole="Sys_Buttons" />
+          <NavigationProperty Name="Sys_Navigations" Relationship="RBACModel.FK_Sys_NavButtons_Sys_Navigations" FromRole="Sys_NavButtons" ToRole="Sys_Navigations" />
+        </EntityType>
+        <Association Name="FK_Sys_NavButtons_Sys_Buttons">
+          <End Type="RBACModel.Sys_Buttons" Role="Sys_Buttons" Multiplicity="1" />
+          <End Type="RBACModel.Sys_NavButtons" Role="Sys_NavButtons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Buttons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_NavButtons">
+              <PropertyRef Name="BtnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_NavButtons_Sys_Navigations">
+          <End Type="RBACModel.Sys_Navigations" Role="Sys_Navigations" Multiplicity="1" />
+          <End Type="RBACModel.Sys_NavButtons" Role="Sys_NavButtons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Navigations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_NavButtons">
+              <PropertyRef Name="NavId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sys_Users_Roles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Sys_Roles" Relationship="RBACModel.FK_Sys_Users_Roles_Sys_Roles" FromRole="Sys_Users_Roles" ToRole="Sys_Roles" />
+          <NavigationProperty Name="Sys_Users" Relationship="RBACModel.FK_Sys_Users_Roles_Sys_Users" FromRole="Sys_Users_Roles" ToRole="Sys_Users" />
+        </EntityType>
+        <Association Name="FK_Sys_Users_Roles_Sys_Roles">
+          <End Type="RBACModel.Sys_Roles" Role="Sys_Roles" Multiplicity="1" />
+          <End Type="RBACModel.Sys_Users_Roles" Role="Sys_Users_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_Users_Roles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_Users_Roles_Sys_Users">
+          <End Type="RBACModel.Sys_Users" Role="Sys_Users" Multiplicity="1" />
+          <End Type="RBACModel.Sys_Users_Roles" Role="Sys_Users_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sys_Users_Roles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sys_Parameter">
+          <Key>
+            <PropertyRef Name="ParamCode" />
+          </Key>
+          <Property Name="ParamCode" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="100" />
+          <Property Name="ParamValue" Type="String" Nullable="false" MaxLength="100" />
+          <Property Name="IsUserEditable" Type="Boolean" Nullable="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="1000" />
+          <Property Name="AddTime" Type="DateTime" Nullable="false" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" />
+        </EntityType>
+
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RBACModelStoreContainer" CdmEntityContainer="RBACEntities">
+    <EntitySetMapping Name="Sys_Buttons">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Buttons)">
+        <MappingFragment StoreEntitySet="Sys_Buttons">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ButtonText" ColumnName="ButtonText" />
+          <ScalarProperty Name="SortNum" ColumnName="SortNum" />
+          <ScalarProperty Name="IconCls" ColumnName="IconCls" />
+          <ScalarProperty Name="IconUrl" ColumnName="IconUrl" />
+          <ScalarProperty Name="ButtonTag" ColumnName="ButtonTag" />
+          <ScalarProperty Name="ButtonHtml" ColumnName="ButtonHtml" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Departments">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Departments)">
+        <MappingFragment StoreEntitySet="Sys_Departments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="SortNum" ColumnName="SortNum" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Groups">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Groups)">
+        <MappingFragment StoreEntitySet="Sys_Groups">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_LogDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_LogDetails)">
+        <MappingFragment StoreEntitySet="Sys_LogDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LogId" ColumnName="LogId" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="ColumnText" ColumnName="ColumnText" />
+          <ScalarProperty Name="ColumnDataType" ColumnName="ColumnDataType" />
+          <ScalarProperty Name="OldValue" ColumnName="OldValue" />
+          <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Logs">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Logs)">
+        <MappingFragment StoreEntitySet="Sys_Logs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LogSettingId" ColumnName="LogSettingId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PrimaryKeyValue" ColumnName="PrimaryKeyValue" />
+          <ScalarProperty Name="OperationIP" ColumnName="OperationIP" />
+          <ScalarProperty Name="SqlText" ColumnName="SqlText" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_LogSettings">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_LogSettings)">
+        <MappingFragment StoreEntitySet="Sys_LogSettings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="BusinessName" ColumnName="BusinessName" />
+          <ScalarProperty Name="PrimaryKey" ColumnName="PrimaryKey" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Navigations">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Navigations)">
+        <MappingFragment StoreEntitySet="Sys_Navigations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NavTitle" ColumnName="NavTitle" />
+          <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
+          <ScalarProperty Name="IconCls" ColumnName="IconCls" />
+          <ScalarProperty Name="IconUrl" ColumnName="IconUrl" />
+          <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="NavTag" ColumnName="NavTag" />
+          <ScalarProperty Name="BigImageUrl" ColumnName="BigImageUrl" />
+          <ScalarProperty Name="SortNum" ColumnName="SortNum" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Roles)">
+        <MappingFragment StoreEntitySet="Sys_Roles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="SortNum" ColumnName="SortNum" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Users">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Users)">
+        <MappingFragment StoreEntitySet="Sys_Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PassSalt" ColumnName="PassSalt" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="IsDisabled" ColumnName="IsDisabled" />
+          <ScalarProperty Name="TrueName" ColumnName="TrueName" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="QQ" ColumnName="QQ" />
+          <ScalarProperty Name="MenusJson" ColumnName="MenusJson" />
+          <ScalarProperty Name="ConfigJson" ColumnName="ConfigJson" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.sysdiagrams)">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Users_Groups">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Users_Groups)">
+        <MappingFragment StoreEntitySet="Sys_Users_Groups">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_GroupNavBtns">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_GroupNavBtns)">
+        <MappingFragment StoreEntitySet="Sys_GroupNavBtns">
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="NavId" ColumnName="NavId" />
+          <ScalarProperty Name="BtnId" ColumnName="BtnId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Users_Departments">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Users_Departments)">
+        <MappingFragment StoreEntitySet="Sys_Users_Departments">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="DepId" ColumnName="DepId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_UserNavBtns">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_UserNavBtns)">
+        <MappingFragment StoreEntitySet="Sys_UserNavBtns">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="NavId" ColumnName="NavId" />
+          <ScalarProperty Name="BtnId" ColumnName="BtnId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Roles_Departments">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Roles_Departments)">
+        <MappingFragment StoreEntitySet="Sys_Roles_Departments">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="DepId" ColumnName="DepId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_RoleNavBtns">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_RoleNavBtns)">
+        <MappingFragment StoreEntitySet="Sys_RoleNavBtns">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="NavId" ColumnName="NavId" />
+          <ScalarProperty Name="BtnId" ColumnName="BtnId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_NavButtons">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_NavButtons)">
+        <MappingFragment StoreEntitySet="Sys_NavButtons">
+          <ScalarProperty Name="NavId" ColumnName="NavId" />
+          <ScalarProperty Name="BtnId" ColumnName="BtnId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SortNum" ColumnName="SortNum" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Users_Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Users_Roles)">
+        <MappingFragment StoreEntitySet="Sys_Users_Roles">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Parameter">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Parameter)">
+        <MappingFragment StoreEntitySet="Sys_Parameter">
+          <ScalarProperty Name="ParamCode" ColumnName="ParamCode" />
+          <ScalarProperty Name="ParamValue" ColumnName="ParamValue" />
+          <ScalarProperty Name="IsUserEditable" ColumnName="IsUserEditable" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

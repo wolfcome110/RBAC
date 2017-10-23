@@ -1,0 +1,231 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmins.cshtml";
+}
+
+<script type="text/javascript">
+    $(function () {
+
+        $('#dg').datagrid({
+            url: 'index',
+            method: 'post',
+            title: '操作日志管理',
+            iconCls: 'icon-save',
+            dataType: "json",
+            rownumbers: true, //是否加行号
+            pagination: true, //是否显式分页
+            pageSize: 15, //页容量，必须和pageList对应起来，否则会报错
+            pageNumber: 2, //默认显示第几页
+            pageList: [15, 30, 45],//分页中下拉选项的数值
+            width: 1000,
+            height: 500,
+            fitColumns: true,
+            singleSelect: false,
+            columns: [[
+                { field: "chk", checkbox: true },
+                { field: 'Id', title: 'Id', width: 70 },
+                { field: 'TableName', title: 'TableName', width: 120, editor: { type: 'validatebox', options: { required: true } } },
+                { field: 'BusinessName', title: 'BusinessName', width: 120, editor: { type: 'validatebox', options: { required: true } } },
+                { field: 'PrimaryKey', title: 'PrimaryKey', width: 120, editor: { type: 'validatebox', options: { required: true } } },
+                { field: 'Remark', title: 'Remark', width: 120, editor: { type: 'validatebox' } },
+                {
+                    field: 'AddTime', title: 'AddTime', width: 150, formatter: function (value, row, index) {
+                        if (value == null) return;
+                        var date = value.substr(1, value.length - 2);
+                        date = value.substr(1, value.length - 2);
+                        date = eval('(new ' + date + ');');
+                        return date.format("yyyy-MM-dd HH:mm:ss");
+                    }
+                },
+
+
+            ]],
+            toolbar: [{
+                text: '添加',
+                iconCls: 'icon-add',
+                handler: function () {
+                    //if (editIndex != undefined) return;
+                    //var date = new Date().format("yyyyMMddHHmmssll");
+
+                    $('#dg').datagrid('appendRow', {});
+                    var editIndex = $('#dg').datagrid('getRows').length - 1;
+                    //console.log($('#dg').datagrid('selectRow', editIndex));
+
+                    //if ($.inArray(editIndex, insertedRowsIndex) == -1) {
+                    //    insertedRowsIndex.push(editIndex);
+                    //}
+                    //console.log(insertedRowsIndex);
+                    $('#dg').datagrid('selectRow', editIndex).datagrid('beginEdit', editIndex);
+
+                }
+            }, {
+                id: "edit",
+                text: '修改',
+                iconCls: 'icon-edit',
+                handler: function () {
+                    var rows = $('#dg').datagrid('getSelections');
+                    for (var i in rows) {
+                        var rowIndex = $("#dg").datagrid("getRowIndex", rows[i]);
+                        $('#dg').datagrid('beginEdit', rowIndex);
+                    }
+
+                }
+            }, {
+                text: "删除",
+                iconCls: "icon-remove",
+                handler: function () {
+                    //console.log($("#dg").datagrid("getSelections"));
+                    var rows = $("#dg").datagrid("getSelections");
+
+                    $.each(rows, function (i, data) {
+                        var rowIndex = $("#dg").datagrid("getRowIndex", data);
+                        $("#dg").datagrid("deleteRow", rowIndex);
+                    });
+                }
+            },
+            {
+                text: "还原",
+                iconCls: "icon-undo",
+                handler: function () {
+                    //console.log($("#dg").datagrid("getSelections"));
+                    $('#dg').datagrid('rejectChanges');
+                }
+
+            }, '-', {
+                text: '保存',
+                iconCls: 'icon-save',
+                handler: function () {
+                    
+
+                    for (var i = 0; i < $("#dg").datagrid('getRows').length; i++) {
+                        $("#dg").datagrid('endEdit', i);
+                    }
+
+                    var rows = $("#dg").datagrid('getChanges');
+
+                    var insertedRows = $("#dg").datagrid("getChanges", "inserted");
+                    var updatedRows = $("#dg").datagrid("getChanges", "updated");
+                    var deletedRows = $("#dg").datagrid("getChanges", "deleted");
+                    var data = new Object;
+                    if (insertedRows.length) {
+                        data["insertedRows"] = JSON.stringify(insertedRows);
+                    }
+
+                    if (updatedRows.length) {
+                        data["updatedRows"] = JSON.stringify(updatedRows);
+                    }
+
+                    if (deletedRows.length) {
+                        data["deletedRows"] = JSON.stringify(deletedRows);
+                    }
+
+                    $('#dg').datagrid('acceptChanges');//此句是提交表单，如果不提交，getChanges方法会返回所有未提交的数据
+                    $("#dg").datagrid("unselectAll");
+
+                    insertedRowsIndex = [];
+                    updatedRowsIndex = [];
+
+
+                    console.log(data);
+
+                    if (rows.length > 0) {
+                        //更新数据库
+                        $.ajax({
+                            url: "BatchSave",
+                            type: "post",
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+                                console.log(data);
+                                if (data.success) { }
+                                $.messager.alert('提示', data.Message, 'info');
+
+                                if (data.success) {
+                                    //$("#dg").datagrid("reload");
+                                }
+
+
+                            },
+                            error: function (jqXHR, textStatus, errorMsg) {
+                                // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                                // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                                // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                                alert("请求失败：" + errorMsg);
+                            }
+                        });
+                    }
+                }
+            }, "-", {
+                id: "createHTML",
+                text: '生成静态页面',
+                iconCls: 'icon-save',
+                handler: function () {
+                    console.log($("input[type='checkbox'][class='chk']")[2].name);
+                    return;
+                    //生成静态页面
+                    $.ajax({
+                        url: "CreateHTML",
+                        type: "POST",
+                        data: {},
+                        success: function (data, textStatus, jqXHR) {
+                            console.log(data);
+                            $.messager.alert('提示', data.message, data.success ? 'info' : 'error');
+
+                        },
+                        error: function (jqXHR, textStatus, errorMsg) {
+                            // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                            // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                            // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                            $.messager.alert('请求失败', data.message, 'error');
+                        }
+                    });
+                }
+            }, {
+                id: "singout",
+                text: '退出',
+                //iconCls: 'icon-save',
+                handler: function () {
+                    //$.post("SingOut");
+                    //return;
+                    $.messager.confirm('确认', '您确认想要退出吗？', function (r) {
+                        if (r) {
+                            $.ajax({
+                                url: "SingOut",
+                                type: "POST",
+                                data: {},
+                                success: function (data, textStatus, jqXHR) {
+                                    //console.log(data);
+                                    //$.messager.alert('提示', data.message, data.success ? 'info' : 'error');
+                                    window.location.href = "/admin";
+                                },
+                                error: function (jqXHR, textStatus, errorMsg) {
+                                    // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                                    // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                                    // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                                    $.messager.alert('请求失败', data.message, 'error');
+                                }
+                            });
+                        }
+                    });
+
+
+                }
+            }]
+        });
+        $("#createHTML").hide();
+
+        //ecs按键退出修改
+        $(window).keydown(function (event) {
+            //console.log(event.keyCode);
+            switch (event.keyCode) {
+                case 27:
+                    $('#dg').datagrid('rejectChanges');
+            }
+        });
+
+
+    });
+
+
+
+</script>
+<table id="dg"></table>

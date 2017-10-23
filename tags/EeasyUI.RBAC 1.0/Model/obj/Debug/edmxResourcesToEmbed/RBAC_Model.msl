@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RBACModelStoreContainer" CdmEntityContainer="RBACEntities">
+    <EntitySetMapping Name="Sys_Buttons">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Buttons)">
+        <MappingFragment StoreEntitySet="Sys_Buttons">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ButtonText" ColumnName="ButtonText" />
+          <ScalarProperty Name="SortNum" ColumnName="SortNum" />
+          <ScalarProperty Name="IconCls" ColumnName="IconCls" />
+          <ScalarProperty Name="IconUrl" ColumnName="IconUrl" />
+          <ScalarProperty Name="ButtonTag" ColumnName="ButtonTag" />
+          <ScalarProperty Name="ButtonHtml" ColumnName="ButtonHtml" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Departments">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Departments)">
+        <MappingFragment StoreEntitySet="Sys_Departments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="SortNum" ColumnName="SortNum" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Groups">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Groups)">
+        <MappingFragment StoreEntitySet="Sys_Groups">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_LogDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_LogDetails)">
+        <MappingFragment StoreEntitySet="Sys_LogDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LogId" ColumnName="LogId" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="ColumnText" ColumnName="ColumnText" />
+          <ScalarProperty Name="ColumnDataType" ColumnName="ColumnDataType" />
+          <ScalarProperty Name="OldValue" ColumnName="OldValue" />
+          <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Logs">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Logs)">
+        <MappingFragment StoreEntitySet="Sys_Logs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LogSettingId" ColumnName="LogSettingId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PrimaryKeyValue" ColumnName="PrimaryKeyValue" />
+          <ScalarProperty Name="OperationIP" ColumnName="OperationIP" />
+          <ScalarProperty Name="SqlText" ColumnName="SqlText" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_LogSettings">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_LogSettings)">
+        <MappingFragment StoreEntitySet="Sys_LogSettings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="BusinessName" ColumnName="BusinessName" />
+          <ScalarProperty Name="PrimaryKey" ColumnName="PrimaryKey" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Navigations">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Navigations)">
+        <MappingFragment StoreEntitySet="Sys_Navigations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NavTitle" ColumnName="NavTitle" />
+          <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
+          <ScalarProperty Name="IconCls" ColumnName="IconCls" />
+          <ScalarProperty Name="IconUrl" ColumnName="IconUrl" />
+          <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="NavTag" ColumnName="NavTag" />
+          <ScalarProperty Name="BigImageUrl" ColumnName="BigImageUrl" />
+          <ScalarProperty Name="SortNum" ColumnName="SortNum" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Roles)">
+        <MappingFragment StoreEntitySet="Sys_Roles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="SortNum" ColumnName="SortNum" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Users">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Users)">
+        <MappingFragment StoreEntitySet="Sys_Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PassSalt" ColumnName="PassSalt" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="IsDisabled" ColumnName="IsDisabled" />
+          <ScalarProperty Name="TrueName" ColumnName="TrueName" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="QQ" ColumnName="QQ" />
+          <ScalarProperty Name="MenusJson" ColumnName="MenusJson" />
+          <ScalarProperty Name="ConfigJson" ColumnName="ConfigJson" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.sysdiagrams)">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Users_Groups">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Users_Groups)">
+        <MappingFragment StoreEntitySet="Sys_Users_Groups">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_GroupNavBtns">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_GroupNavBtns)">
+        <MappingFragment StoreEntitySet="Sys_GroupNavBtns">
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="NavId" ColumnName="NavId" />
+          <ScalarProperty Name="BtnId" ColumnName="BtnId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Users_Departments">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Users_Departments)">
+        <MappingFragment StoreEntitySet="Sys_Users_Departments">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="DepId" ColumnName="DepId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_UserNavBtns">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_UserNavBtns)">
+        <MappingFragment StoreEntitySet="Sys_UserNavBtns">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="NavId" ColumnName="NavId" />
+          <ScalarProperty Name="BtnId" ColumnName="BtnId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Roles_Departments">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Roles_Departments)">
+        <MappingFragment StoreEntitySet="Sys_Roles_Departments">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="DepId" ColumnName="DepId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_RoleNavBtns">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_RoleNavBtns)">
+        <MappingFragment StoreEntitySet="Sys_RoleNavBtns">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="NavId" ColumnName="NavId" />
+          <ScalarProperty Name="BtnId" ColumnName="BtnId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_NavButtons">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_NavButtons)">
+        <MappingFragment StoreEntitySet="Sys_NavButtons">
+          <ScalarProperty Name="NavId" ColumnName="NavId" />
+          <ScalarProperty Name="BtnId" ColumnName="BtnId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SortNum" ColumnName="SortNum" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Users_Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Users_Roles)">
+        <MappingFragment StoreEntitySet="Sys_Users_Roles">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sys_Parameter">
+      <EntityTypeMapping TypeName="IsTypeOf(RBACModel.Sys_Parameter)">
+        <MappingFragment StoreEntitySet="Sys_Parameter">
+          <ScalarProperty Name="ParamCode" ColumnName="ParamCode" />
+          <ScalarProperty Name="ParamValue" ColumnName="ParamValue" />
+          <ScalarProperty Name="IsUserEditable" ColumnName="IsUserEditable" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

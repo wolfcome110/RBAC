@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Database";
+    Layout = "~/Views/Shared/_LayoutAdmins.cshtml";
+}
+<style type="text/css">
+    .iconClsDatabase {
+        background: url('/Frames/Themes/images/16/db.png') no-repeat center center;
+    }
+    .iconClsTable {
+        background: url('/Frames/Themes/images/16/table.png') no-repeat center center;
+    }
+
+    .tree-title {
+        padding: 0 5px;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $("#tt").tree({
+            url: "DatabaseList",
+            lines: true,
+            animate: true,
+            formatter: function (node) {
+                return node.text;
+            },
+        });
+    });
+</script>
+<ul id="tt"></ul>
