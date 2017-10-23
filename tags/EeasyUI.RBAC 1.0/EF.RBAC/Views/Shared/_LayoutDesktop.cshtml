@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Scripts/jquery-easyui-1.4.1/themes/gray/easyui.css" rel="stylesheet" />
+    <link href="~/Scripts/jquery-easyui-1.4.1/themes/icon.css" rel="stylesheet" />
+    <link href="~/Content/icons-customed/icon.css" rel="stylesheet" />
+    <link href="~/windows/css/app.css" rel="stylesheet" />
+
+    @*<script src="~/windows/js/jquery.js"></script>*@
+    
+    <!--[if lt IE 9]>
+        <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+        <![endif]-->
+    <!--[if gte IE 9]><!-->
+        <script src="~/Scripts/jquery-2.2.1.min.js"></script>
+    <!--<![endif]-->
+
+    @*<script src="~/windows/js/jquery.easyui.min.js"></script>*@
+    <script src="~/Scripts/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js"></script>
+    <script src="~/Scripts/jquery-easyui-1.4.1/treegrid-dnd/treegrid-dnd.js"></script>
+    <script src="~/Scripts/jquery.cookie-1.4.1.min.js"></script>
+    <script src="~/Scripts/prototype.js"></script>
+    <script src="~/windows/js/jquery.app.js"></script>
+    <script src="~/windows/js/initApp.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //$.messager.alert("科e互联","欢迎访问科e互联，您现在可以体验改应用了，更多JS代码请继续关注<a style='color:green' target='_blank' href='http://www.internetke.com'>科e互联网页特效</a>");
+
+            if ($.browser && $.browser.msie && parseInt($.browser.version) < 8) {
+                $.messager.alert("温馨提示", "您当前正在使用的是IE" + $.browser.version + "。该程序支持<a style='color:green' target='_blank' href='http://windows.microsoft.com/zh-CN/internet-explorer/products/ie/home'>IE8.0</a>以上版本及谷歌，火狐..");
+            }
+            try {
+                top.location.hostname;
+                if (top.location.hostname != window.location.hostname) {
+                    top.location.href = window.location.href;
+                }
+            }
+            catch (e) {
+                top.location.href = window.location.href;
+            }
+
+        });
+    </script>
+
+</head>
+<body>
+
+    @RenderBody()
+
+    <script>
+        function myWindow(obj, options, callback) {
+            //var opt = {};
+            $.extend(options, {
+                onClose: function () {
+                    //$(this).window("destroy");
+                    $(this).dialog("destroy");
+                }
+            });
+
+            //$(obj).window(options);
+            $(obj).dialog(options);
+            //console.log("options==>", $(obj).window("options"));
+
+            if (callback != undefined) {
+                callback.call(obj);
+            }
+            
+        }
+    </script>
+</body>
+</html>

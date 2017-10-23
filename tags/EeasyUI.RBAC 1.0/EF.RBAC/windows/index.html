@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>EasyUI实现windows桌面应用效果 - 【科e互联】</title>
+<link rel="stylesheet" type="text/css" media="screen" href="css/easyui.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/app.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/icon.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/jquery.app.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/initApp.js" charset="utf-8"></script>
+<script type="text/javascript">
+$(function(){
+	//$.messager.alert("科e互联","欢迎访问科e互联，您现在可以体验改应用了，更多JS代码请继续关注<a style='color:green' target='_blank' href='http://www.internetke.com'>科e互联网页特效</a>");
+	
+   if($.browser.msie && parseInt($.browser.version) < 8){ 
+      $.messager.alert("温馨提示","您当前正在使用的是IE"+$.browser.version+"。该程序支持<a style='color:green' target='_blank' href='http://windows.microsoft.com/zh-CN/internet-explorer/products/ie/home'>IE8.0</a>以上版本及谷歌，火狐..");
+    }
+    try{
+    　    　top.location.hostname;
+    　　if (top.location.hostname != window.location.hostname) {
+    　　　　top.location.href =window.location.href;
+    　　}
+    }
+    catch(e){
+    　　top.location.href = window.location.href;
+    }
+});
+</script>
+</head>
+<body>
+</body>
+</html>

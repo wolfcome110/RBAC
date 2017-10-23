@@ -1,0 +1,176 @@
+﻿@model EF.RBAC.Models.MyDatabase
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmins.cshtml";
+}
+
+<div data-options="region:'center',title:''" style="padding:0px;background:#eee;">
+    <table id="dgDatabase"></table>
+</div>
+<!-- 工具栏 -->
+<div id="toolbar" style="height:28px;">
+    @Html.Raw(ViewBag.UserAuthority)
+</div>
+
+<script>
+    var databasename = "RBAC";//数据库名称
+    var dgDatabase = $('#dgDatabase');
+    dgDatabase.datagrid({
+        url: 'index',
+        method: 'post',
+        title: '数据库<备份/还原>',
+        iconCls: 'icon-save',
+        dataType: "json",
+        border:0,
+        rownumbers: true, //是否加行号
+        pagination: true, //是否显式分页
+        pageSize: 15, //页容量，必须和pageList对应起来，否则会报错
+        pageNumber: 2, //默认显示第几页
+        pageList: [15, 30, 45],//分页中下拉选项的数值
+        fit:true,
+        fitColumns: true,
+        singleSelect: true,
+        columns: [[
+            { field: "chk", checkbox: true },
+            //{ field: 'Id', title: 'Id', width: 70 },
+            {
+                field: 'FileName', title: 'FileName', width: 120, editor: {
+                    type: 'validatebox', options: {
+                        required: true
+                    }
+                }
+            },
+            {
+                field: 'DataBaseName', title: 'DataBaseName', width: 120, editor: {
+                    type: 'validatebox', options: {
+                        required: true
+                    }
+                }, formatter: function (value, row, index) {
+                    return databasename;
+                }
+            },
+            {
+                field: 'CreateTime', title: 'CreateTime', width: 150, formatter: function (value, row, index) {
+                    if (value == null) return;
+                    var date = value.substr(1, value.length - 2);
+                    date = value.substr(1, value.length - 2);
+                    date = eval('(new ' + date + ');');
+                    return date.format("yyyy-MM-dd HH:mm:ss");
+                }
+            },
+
+        ]],
+        onClickRow: function (rowIndex, rowData) {
+
+            if (event.ctrlKey && event.button == 0) {
+                $(this).datagrid("options").singleSelect = false;
+            }
+            else {
+                $(this).datagrid("options").singleSelect = true;
+            }
+        },
+        toolbar: "#toolbar"
+    });
+
+    $(window).keydown(function (event) {
+        switch (event.keyCode) {
+            case 27:
+                dgDatabase.datagrid('rejectChanges');
+        }
+    });
+
+
+    var toolbar = {
+        backup: function ($dg) {
+            $.ajax({
+                url: "Backup",
+                type: "post",
+                //data: data,
+                beforeSend: function (data) {
+                    window.win = tools.waiting();
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (data.success) {
+                        $dg.datagrid('appendRow', data.data);
+                    }
+                    top.$.messager.alert('提示', data.Message, 'info', function () {
+                        tools.close(window.win);
+                    });
+
+                },
+                error: function (jqXHR, textStatus, errorMsg) {
+                    // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                    // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                    // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                    top.$.messager.alert('提示', "请求失败：" + errorMsg, 'info', function () {
+                        tools.close(window.win);
+                    });
+                }
+            });
+        },//
+        delete: function ($dg) {
+            $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
+                if (r) {
+                    var rows = $dg.datagrid("getSelections");
+                    var d = { Rows: JSON.stringify(rows) };
+
+                    $.ajax({
+                        url: "Delete",
+                        type: "post",
+                        data: d,
+                        success: function (data, textStatus, jqXHR) {
+                            if (data.success) {
+                                $dg.datagrid("reload");
+                            }
+                            $.messager.alert('提示', data.Message, 'info');
+
+                        },
+                        error: function (jqXHR, textStatus, errorMsg) {
+                            // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                            // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                            // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                            alert("请求失败：" + errorMsg);
+                        }
+                    });
+                }
+            });
+        },//
+        restore: function ($dg) {
+            var rows = $dg.datagrid("getSelected");
+            $.ajax({
+                url: "Restore",
+                type: "post",
+                data: rows,
+                success: function (data, textStatus, jqXHR) {
+                    if (data.success) { }
+                    $.messager.alert('提示', data.Message, 'info');
+
+                },
+                error: function (jqXHR, textStatus, errorMsg) {
+                    // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                    // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                    // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                    alert("请求失败：" + errorMsg);
+                }
+            });
+        },//
+        help: function ($dg) {
+            $('#dlgHelper').dialog({
+                title: '帮助',
+                iconCls: 'icon-help',
+                width: 800,
+                height: 500,
+                closed: false,
+                cache: false,
+                href: '/Sys_Helper/index#role',
+                modal: true
+            });
+        },//
+    };
+
+    $("#toolbar").find("#btn_Bakup").on("click", function () { toolbar.backup(dgDatabase); });
+    $("#toolbar").find("#btn_Delete").on("click", function () { toolbar.delete(dgDatabase); });
+    $("#toolbar").find("#btn_Restore").on("click", function () { toolbar.restore(dgDatabase); });
+    $("#toolbar").find("#btn_Help").on("click", function () { toolbar.help(dgDatabase); });
+</script>

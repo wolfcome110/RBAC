@@ -1,0 +1,224 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmins.cshtml";
+}
+
+
+<div data-options="region:'center',title:''">
+    <table id="dgButtons"></table>
+</div>
+
+<div id="win">
+</div>
+
+<div id="dlgHelper"></div>
+
+<div id="toolbar" style="height:28px;">
+    @Html.Raw(ViewBag.UserAuthority)
+</div>
+
+<script type="text/javascript">
+
+    var dgButtons = $("#dgButtons");
+    dgButtons.datagrid({
+        url: '/Sys_Buttons/index',
+        method: 'post',
+        //title: '操作按钮管理',
+        iconCls: 'icon-save',
+        dataType: "json",
+        rownumbers: true, //是否加行号
+        //pagination: true, //是否显式分页
+        //pageSize: 15, //页容量，必须和pageList对应起来，否则会报错
+        //pageNumber: 2, //默认显示第几页
+        //pageList: [15, 30, 45],//分页中下拉选项的数值
+        border: 0,
+        fitColumns: true,
+        fit: true,   //自适应大小
+
+        singleSelect: false,
+        columns: [[
+            { field: "chk", checkbox: true },
+            { field: 'Id', title: 'Id', width: 70 },
+            { field: 'ButtonText', title: 'ButtonText', width: 120, editor: { type: 'text' } },
+            {
+                field: 'IconCls', title: 'IconCls', width: 120, editor: { type: 'text' }, formatter: function (value, row, index) {
+                    return '<span class="icon ' + value + '">&nbsp;</span>';
+                }, align: 'center',
+            },
+            { field: 'IconUrl', title: 'IconUrl', width: 120, editor: { type: 'text' } },
+            { field: 'ButtonTag', title: 'ButtonTag', width: 120, editor: { type: 'text' } },
+            { field: 'ButtonHtml', title: 'ButtonHtml', width: 120, editor: { type: 'text' } },
+            { field: 'Remark', title: 'Remark', width: 120, editor: { type: 'text' } },
+            {
+                field: 'AddTime', title: 'AddTime', width: 150, formatter: function (value, row, index) {
+                    if (value == null) return;
+                    var date = value.substr(1, value.length - 2);
+                    date = value.substr(1, value.length - 2);
+                    date = eval('(new ' + date + ');');
+                    return date.format("yyyy-MM-dd HH:mm:ss");
+                }
+            },
+            { field: 'SortNum', title: 'SortNum', width: 70, editor: { type: 'numberbox' } },
+
+        ]],
+        onBeginEdit: function (rowIndex, rowData) {
+            //console.log(rowIndex, rowData);
+            var ed = $(this).datagrid('getEditor', { index: rowIndex, field: 'IconCls' });
+            //console.log(ed);
+            //$(ed.target).datebox('setValue', '5/4/2012');
+            $(ed.target).off("click").on("click", function (e) {
+ 
+                var options = {
+                    title: "图标选取",
+                    width: 786,
+                    height: 600,
+                    modal: true,
+                    href: '/Icon/Icon16',
+                    closed: false,
+                    iconCls: "icon-application_view_icons",
+                    //inline:true,
+                    onLoad: function () {
+                        //alert('loaded successfully');
+
+                        top.$("#icon16list li")
+                            .css({ float: "left", display: "inline-block", border: "1px solid #fff", "line-height": "20px", 'margin-right': "4px", width: "16px", cursor: "pointer" })
+                            .hover(function () {
+                                $(this).css({ 'border': '1px solid red' });
+                            }, function () {
+                                $(this).css({ 'border': '1px solid #fff' });
+                            })
+                            .off("click")
+                            .on("click", function () {
+                                $(ed.target).val($(this).find("span").attr("class").split(" ")[1]);
+                                top.$('#win').window("close");
+                            });
+                    }
+                };
+                //$("#win").window(options);
+                top.myWindow($("#win").clone(true), options);
+
+            });
+        },
+        toolbar: "#toolbar"
+    });
+
+
+
+    $("#createHTML").hide();
+
+    //ecs按键退出修改
+    $(window).keydown(function (event) {
+        //console.log(event.keyCode);
+        switch (event.keyCode) {
+            case 27:
+                dgButtons.datagrid('rejectChanges');
+        }
+    });
+
+
+    var toolbar = {
+        add: function ($dg) {
+            //if (editIndex != undefined) return;
+            //var date = new Date().format("yyyyMMddHHmmssll");
+
+            dgButtons.datagrid('appendRow', { SortNum: 0 });
+            var editIndex = dgButtons.datagrid('getRows').length - 1;
+            //console.log(dgButtons.datagrid('selectRow', editIndex));
+
+            //if ($.inArray(editIndex, insertedRowsIndex) == -1) {
+            //    insertedRowsIndex.push(editIndex);
+            //}
+            //console.log(insertedRowsIndex);
+            dgButtons.datagrid('selectRow', editIndex).datagrid('beginEdit', editIndex);
+        },//Remark
+        edit: function ($dg) {
+            var rows = $dg.datagrid('getSelections');
+            for (var i in rows) {
+                var rowIndex = $dg.datagrid("getRowIndex", rows[i]);
+                $dg.datagrid('beginEdit', rowIndex);
+            }
+        },//
+        delete: function ($dg) {
+            var rows = $dg.datagrid("getSelections");
+
+            $.each(rows, function (i, data) {
+                var rowIndex = $dg.datagrid("getRowIndex", data);
+                $dg.datagrid("deleteRow", rowIndex);
+            });
+        },//
+        restore: function ($dg) {
+            $dg.datagrid('rejectChanges');
+        },//
+        save: function ($dg) {
+            for (var i = 0; i < $dg.datagrid('getRows').length; i++) {
+                $dg.datagrid('endEdit', i);
+            }
+
+            var rows = $dg.datagrid('getChanges');
+
+            var insertedRows = $dg.datagrid("getChanges", "inserted");
+            var updatedRows = $dg.datagrid("getChanges", "updated");
+            var deletedRows = $dg.datagrid("getChanges", "deleted");
+            var data = new Object;
+            if (insertedRows.length) {
+                data["insertedRows"] = JSON.stringify(insertedRows);
+            }
+
+            if (updatedRows.length) {
+                data["updatedRows"] = JSON.stringify(updatedRows);
+            }
+
+            if (deletedRows.length) {
+                data["deletedRows"] = JSON.stringify(deletedRows);
+            }
+
+            $dg.datagrid('acceptChanges');//此句是提交表单，如果不提交，getChanges方法会返回所有未提交的数据
+            $dg.datagrid("unselectAll");
+
+            insertedRowsIndex = [];
+            updatedRowsIndex = [];
+
+
+            console.log(data);
+
+            if (rows.length > 0) {
+                //更新数据库
+                $.ajax({
+                    url: "/Sys_Buttons/BatchSave",
+                    type: "post",
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+                        console.log(data);
+                        if (data.success) { }
+                        $.messager.alert('提示', data.Message, 'info');
+
+                        if (data.success) {
+                            $dg.datagrid("reload");
+
+                        }
+
+                    },
+                    error: function (jqXHR, textStatus, errorMsg) {
+                        // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                        // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                        // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                        alert("请求失败：" + errorMsg);
+                    }
+                });
+            }
+        },//
+        authority: function ($dg) { },//
+        help: function () {
+            top.$("ul.app-container li:contains('帮助')").dblclick();
+        },//
+    };
+    $("#toolbar").find("#btn_Add").on("click", function () { toolbar.add(dgButtons); });
+    $("#toolbar").find("#btn_Edit").on("click", function () { toolbar.edit(dgButtons); });
+    $("#toolbar").find("#btn_Delete").on("click", function () { toolbar.delete(dgButtons); });
+    $("#toolbar").find("#btn_Restore").on("click", function () { toolbar.restore(dgButtons); });
+    $("#toolbar").find("#btn_Save").on("click", function () { toolbar.save(dgButtons); });
+    $("#toolbar").find("#btn_Authority").on("click", function () { toolbar.authority(dgButtons); });
+    $("#toolbar").find("#btn_Help").on("click", function () { toolbar.help(); });
+
+
+</script>

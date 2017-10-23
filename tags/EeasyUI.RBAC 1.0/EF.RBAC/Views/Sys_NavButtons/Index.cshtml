@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Model.Sys_NavButtons>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmins.cshtml";
+}
+<style type="text/css">
+    .datagrid {
+        float: left;
+        display: inline-table;
+    }
+
+    .datagrid {
+    }
+
+    .datagrid:first-of-type ~ .datagrid {
+        margin-left: 20px;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        var insertedRows = new Array();
+        var updatedRows = new Array();
+        var deletedRows = new Array();
+
+        $('#tgNavigations').treegrid({
+            title: 'Sys_Navigations',
+            url: '/Sys_Navigations/index',
+            idField: 'Id',
+            treeField: 'NavTitle',
+            rownumbers: true, //是否加行号
+            iconCls: 'icon-save',
+            dataType: "json",
+            width: 600,
+
+            fitColumns: true,
+            singleSelect: false,
+            columns: [[
+                { field: "chk", checkbox: true },
+                { field: 'Id', title: 'Id', width: 70, hidden: false },
+                { field: 'NavTitle', title: 'NavTitle', width: 160 },
+                { field: 'LinkUrl', title: 'LinkUrl', width: 120 },
+                { field: 'IconCls', title: 'IconCls', width: 120, hidden: true, },
+                { field: 'IconUrl', title: 'IconUrl', width: 120, hidden: true, },
+                { field: 'IsVisible', title: 'IsVisible', width: 120, hidden: true, },
+                { field: 'ParentId', title: 'ParentId', width: 120, hidden: true },
+                { field: 'NavTag', title: 'NavTag', width: 120, hidden: true, },
+                { field: 'BigImageUrl', title: 'BigImageUrl', width: 120, hidden: true, },
+            ]],
+
+        });
+
+        $('#dgButtons').datagrid({
+            url: '/Sys_Buttons/index',
+            method: 'post',
+            title: '操作按钮',
+            iconCls: 'icon-save',
+            dataType: "json",
+            rownumbers: true, //是否加行号
+            width: 300,
+
+            fitColumns: true,
+            singleSelect: false,
+            columns: [[
+                { field: "chk", checkbox: true },
+                { field: 'Id', title: 'Id', width: 70, hidden: false },
+                { field: 'ButtonText', title: 'ButtonText', width: 120 },
+                { field: 'IconCls', title: 'IconCls', width: 120, hidden: true, },
+                { field: 'IconUrl', title: 'IconUrl', width: 120, hidden: true, },
+                { field: 'ButtonTag', title: 'ButtonTag', width: 120, hidden: true, },
+                { field: 'ButtonHtml', title: 'ButtonHtml', width: 120, hidden: true, },
+                { field: 'Remark', title: 'Remark', width: 120, hidden: true, },
+                //{
+                //    field: 'AddTime', title: 'AddTime', width: 150, hidden: true, formatter: function (value, row, index) {
+                //        if (value == null) return;
+                //        var date = value.substr(1, value.length - 2);
+                //        date = value.substr(1, value.length - 2);
+                //        date = eval('(new ' + date + ');');
+                //        return date.format("yyyy-MM-dd HH:mm:ss");
+                //    }
+                //},
+                { field: 'SortNum', title: 'SortNum', width: 70, hidden: true, },
+
+            ]],
+        });
+
+        $("#btnOk").on("click", function () {
+            var d = {};
+            //var d = new Object;
+            d["Navigations"] = JSON.stringify($("#tgNavigations").treegrid("getSelections"));
+            d["Buttons"] = JSON.stringify($("#dgButtons").datagrid("getSelections"));
+            console.log(d);
+
+            $.ajax({
+                url: "Save",
+                type: "post",
+                data: d,
+                success: function (data, textStatus, jqXHR) {
+                    console.log(data);
+                    if (data.success) { }
+                    $.messager.alert('提示', data.Message, 'info');
+
+                    if (data.success) {
+                        //$("#dg").datagrid("reload");
+                    }
+                },
+                error: function (jqXHR, textStatus, errorMsg) {
+                    // jqXHR 是经过jQuery封装的XMLHttpRequest对象
+                    // textStatus 可能为： null、"timeout"、"error"、"abort"或"parsererror"
+                    // errorMsg 可能为： "Not Found"、"Internal Server Error"等
+                    alert("请求失败：" + errorMsg);
+                }
+            });
+        });
+
+
+        $("#btnCancel").on("click", function () {
+            $('#win').window({ title: "Choose department", modal: true }).window("close");
+        });
+
+    });
+
+
+
+</script>
+
+<a id="btnOk" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" style="width:80px">Ok</a>
+<a id="btnCancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" style="width:80px">Cancel</a>
+
+<table id="tgNavigations"></table>
+
+<table id="dgButtons"></table>

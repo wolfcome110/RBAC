@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "您所访问的网页无法显示";
+    Layout = "~/Views/Shared/_LayoutAdmins.cshtml";
+}
+<style type="text/css">
+    body {
+        background-color: #F7F7F7;
+    }
+
+    .not-support-browser {
+        background-color: #FFFFFF;
+        border: 1px solid #CED0D3;
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        width: 650px;
+        height: 350px;
+        margin: 100px auto;
+        padding: 0px;
+    }
+
+    .Learun-logo {
+        background-color: #333;
+    }
+
+    .not-support-browser-contant {
+        color: #666666;
+        font-size: 18px;
+        margin: 35px 25px;
+    }
+</style>
+
+<div class="not-support-browser">
+    <div class="not-support-browser-contant">
+        <div style="text-align: center;">
+            <h1 style="font-size: 44px">您所访问的页面无法显示</h1>
+        </div>
+        <p>
+            <span id="LblErrorInfo" size="5" face="黑体">
+                1.异常页面: /CommonModule/User/UserList.html<br>2.异常信息: Object reference not set to an instance of an object.<br>3.异常信息: 无法打开登录所请求的数据库 "BPMS"。登录失败。
+                用户 'learun' 登录失败。<br>
+            </span>
+        </p>
+    </div>
+</div>
+

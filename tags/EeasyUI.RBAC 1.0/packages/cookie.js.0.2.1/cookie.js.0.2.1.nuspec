@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>cookie.js</id>
+    <version>0.2.1</version>
+    <title>Cookie.js</title>
+    <authors>Evertton de Lima</authors>
+    <owners>Evertton de Lima</owners>
+    <licenseUrl>http://evertton.mit-license.org/</licenseUrl>
+    <projectUrl>http://evertton.github.io/cookiejs</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Cookie is a JavaScript library that proposes an abstraction the document.cookie API, designed to make cookies management simple and easy.</description>
+    <summary />
+    <copyright>Evertton de Lima</copyright>
+    <language />
+    <tags>cookie javascript js framework library document.cookie browser simple management lightweight rfc6265</tags>
+  </metadata>
+</package>
