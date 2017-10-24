@@ -1,4 +1,9 @@
-﻿
+﻿/*!
+ * bootstrap.datagrid v1.0.1
+ *
+ * Copyright 2017-2018 bootstrap-datagrid
+ * Licensed under Kermit
+ */
 var $datagrid = function ($dg, options) {
 
     var obj = $.extend({}, {
