@@ -2807,7 +2807,6 @@
     <Content Include="Global.asax" />
     <Content Include="HtmlPage1.html" />
     <Content Include="HtmlPage2.html" />
-    <Content Include="HtmlPage3.html" />
     <Content Include="Content\images\ui-bg_glass_45_0078ae_1x400.png" />
     <Content Include="Content\images\ui-bg_gloss-wave_50_6eac2c_500x100.png" />
     <Content Include="Content\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
